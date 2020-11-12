@@ -5,14 +5,14 @@
   connection: local
   gather_facts: false
   vars:
-          keypair       : maksym
+          keypair       : *****
           instance_type : t2.micro
-          image         : ami-0818dadaae552a40b
+          image         : ********
           region        : eu-central-1
           count         : 1
           security_group: Ansible-SecurityGroup
-          aws_access_key: AKIAJVRU2TPNDGHUPQWA
-          aws_secret_key: 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
+          aws_access_key: *********************
+          aws_secret_key: *********************
   tasks:
           - name: Create group with Port 22, 80 and 443 Open to 0.0.0.0/0
             ec2_group:
