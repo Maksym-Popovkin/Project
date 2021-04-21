@@ -20,6 +20,6 @@ steps:
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Azure subscription 1(08b8118e-8eef-4707-a760-7744c87ffd97)'
-    scriptType: 'batch'
+    scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'call az --version'
