@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-
+  
     runs-on: ubuntu-latest
 
     steps:
@@ -31,3 +31,34 @@ jobs:
         sudo chmod +x mvnw 
         ./mvnw package
         ls -la
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+       name: my-artifact
+       path: target/*.jar
+  deploy: 
+  
+    runs-on: ubuntu-latest
+    
+    needs: build
+    
+    steps:
+    - name: Clone code
+      uses: actions/checkout@v3
+    - name: Setup Java JDK
+      uses: actions/setup-java@v3.4.1
+      with:
+          # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
+        java-version: '11'
+          # Java distribution. See the list of supported distributions in README file
+        distribution: 'adopt'
+          # Name of the build platform to cache dependencies. It can be "maven", "gradle" or "sbt".
+        cache: maven
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: my-artifact
+    - name: Deploy artifact
+      run: |
+        ls -la
+        java -jar *.jar 
