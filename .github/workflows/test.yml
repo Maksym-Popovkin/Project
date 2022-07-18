@@ -10,12 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the site in the jekyll/builder container
+    - name: Clone code
+      uses: actions/checkout@v3
+    - name: Setup Java JDK
+      uses: actions/setup-java@v3.4.1
+      with:
+          # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
+        java-version: '11'
+          # Java distribution. See the list of supported distributions in README file
+        distribution: 'adopt'
+          # Name of the build platform to cache dependencies. It can be "maven", "gradle" or "sbt".
+        cache: maven
+    - name: Build petclinic
       run: |
+        cd spring-petclinic 
+        sudo chmod +x mvnw 
+        ./mvnw package
         ls -la
-        cd web_site
-        ls -la
-        #docker run \
-        #-v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        #jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
