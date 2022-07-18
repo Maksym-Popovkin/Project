@@ -24,6 +24,9 @@ jobs:
     - name: Build petclinic
       run: |
         ls -la
+        cd web_site
+        ls -la
+        cd ..
         cd spring-petclinic 
         sudo chmod +x mvnw 
         ./mvnw package
