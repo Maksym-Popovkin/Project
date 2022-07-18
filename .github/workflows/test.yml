@@ -57,4 +57,4 @@ jobs:
     - name: Deploy petclinic
       run: |
         ls -la
-        java -jar target/*.jar 
+        java -jar *.jar 
