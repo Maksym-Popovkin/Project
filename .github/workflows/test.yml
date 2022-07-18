@@ -35,7 +35,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
        name: my-artifact
-       path: target/*.jar
+       path: target/
   deploy: 
   
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: my-artifact
-    - name: Deploy artifact
+    - name: Deploy petclinic
       run: |
         ls -la
-        java -jar *.jar 
+        java -jar target/*.jar 
