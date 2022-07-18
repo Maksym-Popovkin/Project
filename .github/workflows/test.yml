@@ -23,10 +23,6 @@ jobs:
         cache: maven
     - name: Build petclinic
       run: |
-        ls -la
-        cd web_site
-        ls -la
-        cd ..
         cd pet
         sudo chmod +x mvnw 
         ./mvnw package
@@ -35,7 +31,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
        name: my-artifact
-       path: target/
+       path: pet/target/
   deploy: 
   
     runs-on: ubuntu-latest
