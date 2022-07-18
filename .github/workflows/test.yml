@@ -27,7 +27,7 @@ jobs:
         cd web_site
         ls -la
         cd ..
-        cd spring-petclinic 
+        cd pet
         sudo chmod +x mvnw 
         ./mvnw package
         ls -la
