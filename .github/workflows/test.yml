@@ -61,7 +61,7 @@ jobs:
         port: 22
         username: azureuser
         private_key: ${{ secrets.SSH_KEY }}
-        scp_source: README.md
+        scp_source: hosts.txt
         scp_target: ~/
         before_script: |
           df -h
