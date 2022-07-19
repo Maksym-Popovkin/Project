@@ -64,10 +64,6 @@ jobs:
         scp_source: spring-petclinic-2.4.5.jar
         scp_target: ~/
         before_script: |
-          df -h
+          sudo systemctl stop petclinic.service
         after_script: |
-          whoami    
-    #- name: Deploy petclinic
-     # run: |
-      #  ls -la
-       # java -jar *.jar 
+          sudo systemctl start petclinic.service   
