@@ -2,8 +2,8 @@ name: Jekyll site CI
 
 on:
   push:
-    branches: 
-      - master
+    #branches: 
+     # - master
     paths:
       - '**.txt'
 
