@@ -13,6 +13,11 @@ jobs:
     steps:
     - name: Clone code
       uses: actions/checkout@v3
+    - name: Check out my other private repo
+      uses: actions/checkout@master
+      with:
+        repository: Maksym-Popovkin/diploma
+        #token: ${{ secrets.my_pat }}
     - name: Setup Java JDK
       uses: actions/setup-java@v3.4.1
       with:
