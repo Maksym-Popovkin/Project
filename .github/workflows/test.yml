@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Clone code
-      uses: actions/checkout@v3
+    #- name: Clone code
+     # uses: actions/checkout@v3
     - name: Check out my other private repo
       uses: actions/checkout@master
       with:
@@ -21,58 +21,3 @@ jobs:
       uses: potatoqualitee/mssqlsuite@v1.5.1
       with:
         install: sqlengine, sqlclient, sqlpackage, localdb
-    - name: Setup Java JDK
-      uses: actions/setup-java@v3.4.1
-      with:
-          # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
-        java-version: '11'
-          # Java distribution. See the list of supported distributions in README file
-        distribution: 'adopt'
-          # Name of the build platform to cache dependencies. It can be "maven", "gradle" or "sbt".
-        cache: maven
-    - name: Build petclinic
-      run: |
-        cd pet
-        sudo chmod +x mvnw 
-        ./mvnw package
-        ls -la
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-       name: my-artifact
-       path: pet/target/
-  deploy: 
-  
-    runs-on: ubuntu-latest
-    
-    needs: build
-    
-    steps:
-    - name: Clone code
-      uses: actions/checkout@v3
-    - name: Setup Java JDK
-      uses: actions/setup-java@v3.4.1
-      with:
-          # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
-        java-version: '11'
-          # Java distribution. See the list of supported distributions in README file
-        distribution: 'adopt'
-          # Name of the build platform to cache dependencies. It can be "maven", "gradle" or "sbt".
-        cache: maven
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: my-artifact
-    - name: SSH Server Deploy
-      uses: kostya-ten/ssh-server-deploy@v4
-      with:
-        host: 20.9.145.4
-        port: 22
-        username: azureuser
-        private_key: ${{ secrets.SSH_KEY }}
-        scp_source: spring-petclinic-2.4.5.jar
-        scp_target: ~/
-        before_script: |
-          sudo systemctl stop petclinic.service
-        after_script: |
-          sudo systemctl start petclinic.service   
