@@ -1,8 +1,6 @@
 name: 'Assert Branch Naming Convention'
 #on: pull_request
-on:
-  create:
-    branches
+on: [workflow_dispatch]
 
 jobs:
   branch-naming-rules:
