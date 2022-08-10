@@ -1,6 +1,6 @@
 name: Jekyll site CI
 
-on:[workflow_dispatch]
+on: [workflow_dispatch]
   #push:
    # branches: [ "master" ]
 
