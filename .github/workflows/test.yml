@@ -17,6 +17,10 @@ jobs:
       with:
         repository: Maksym-Popovkin/diploma
         #token: ${{ secrets.my_pat }}
+    - name: Install a SQL Server suite of tools
+      uses: potatoqualitee/mssqlsuite@v1.5.1
+      with:
+        install: sqlengine, sqlclient, sqlpackage, localdb
     - name: Setup Java JDK
       uses: actions/setup-java@v3.4.1
       with:
