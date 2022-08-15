@@ -2,6 +2,11 @@ name: Jekyll site CI
 
 on: [workflow_dispatch]
 
+env: 
+  REPORT: "Report Demographic - w.o. Roster"
+  WORKSPACE: "Features-Presentaion"
+  TABULAR_EDITOR: "TabularEditor.exe"
+
 jobs:
   build:
   
@@ -21,7 +26,7 @@ jobs:
     - name: Install a SQL Server suite of tools
       uses: potatoqualitee/mssqlsuite@v1.5.1
       with:
-        install: sqlengine, sqlclient, sqlpackage
+        install: sqlengine
     - name: Install Tabular Editor
       run: |
         $TabularEditorUrl = "https://cdn.tabulareditor.com/files/te2/TabularEditor.Portable.zip" 
@@ -29,3 +34,5 @@ jobs:
         Invoke-WebRequest -Uri $TabularEditorUrl -OutFile $DownloadDestination
         Expand-Archive -Path $DownloadDestination -DestinationPath (get-location).Path
         Remove-Item $DownloadDestination
+        echo $TABULAR_EDITOR
+        $p = Start-Process -FilePath $TABULAR_EDITOR
