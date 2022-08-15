@@ -10,13 +10,21 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Clone code
-      uses: actions/checkout@v3
-    - name: Check out my other private repo
-      uses: actions/checkout@master
-      with:
-        repository: Maksym-Popovkin/git_test
+    #- name: Clone code
+     # uses: actions/checkout@v3
+    #- name: Check out my other private repo
+     # uses: actions/checkout@master
+      #with:
+       # repository: Maksym-Popovkin/git_test
         #token: ${{ secrets.my_pat }}
+    - uses: actions/checkout@v2
+    - name: Checkout private actions
+      uses: vweevers/multi-checkout-action@v1
+      with:
+        #token: ${{ secrets.GITHUB_MACHINE_TOKEN }}
+       repositories: |
+         Maksym-Popovkin/git_test
+         Maksym-Popovkin/Project
     #- name: Install a SQL Server suite of tools
       #uses: potatoqualitee/mssqlsuite@v1.5.1
       #with:
