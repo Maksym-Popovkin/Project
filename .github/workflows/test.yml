@@ -15,7 +15,7 @@ jobs:
     - name: Check out my other private repo
       uses: actions/checkout@master
       with:
-        repository: Maksym-Popovkin/DevOps_online_Kharkiv_2020Q3Q4
+        repository: Maksym-Popovkin/git_test
         #token: ${{ secrets.my_pat }}
     #- name: Install a SQL Server suite of tools
       #uses: potatoqualitee/mssqlsuite@v1.5.1
