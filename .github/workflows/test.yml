@@ -38,6 +38,7 @@ jobs:
         Remove-Item $DownloadDestination
     - name: test
       run: |
+        cd ..
         pwd
         ls
         
