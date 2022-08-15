@@ -12,10 +12,6 @@ jobs:
       uses: actions/checkout@v3
       with:
         path: master
-    - name: Test
-      run: |
-        runas.exe /savecred /user:administrator Install-Module -Name SqlChangeAutomation
-        runas.exe /savecred /user:administrator Import-Module SqlChangeAutomation
     - name: Checkout tools repo
       uses: actions/checkout@v3
       with:
@@ -39,5 +35,5 @@ jobs:
         py -m pip install pyodbc
         Install-Module -Name PowerShellGet -MinimumVersion 2.0.1 -Force
         runas.exe /savecred /user:administrator Install-Module -Name SqlChangeAutomation
-        Import-Module SqlChangeAutomation
+        runas.exe /savecred /user:administrator Import-Module SqlChangeAutomation
 
