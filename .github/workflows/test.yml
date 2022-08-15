@@ -21,6 +21,10 @@ jobs:
     - name: Test
       run: |
         python --version
+        py -m pip install pyodbc
+        Install-Module -Name PowerShellGet -MinimumVersion 2.0.1 -Force
+        Install-Module -Name SqlChangeAutomation
+        Import-Module SqlChangeAutomation
     - name: Install a SQL Server suite of tools
       uses: potatoqualitee/mssqlsuite@v1.5.1
       with:
@@ -32,3 +36,4 @@ jobs:
         Invoke-WebRequest -Uri $TabularEditorUrl -OutFile $DownloadDestination
         Expand-Archive -Path $DownloadDestination -DestinationPath (get-location).Path
         Remove-Item $DownloadDestination
+
