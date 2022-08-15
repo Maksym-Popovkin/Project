@@ -21,7 +21,7 @@ jobs:
     - name: Install a SQL Server suite of tools
       uses: potatoqualitee/mssqlsuite@v1.5.1
       with:
-        install: sqlengine
+        install: sqlengine, sqlclient, sqlpackage, localdb
     - name: Install Tabular Editor
       run: |
         $TabularEditorUrl = "https://cdn.tabulareditor.com/files/te2/TabularEditor.Portable.zip" 
