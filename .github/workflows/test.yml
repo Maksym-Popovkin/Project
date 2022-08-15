@@ -34,6 +34,6 @@ jobs:
         python --version
         py -m pip install pyodbc
         Install-Module -Name PowerShellGet -MinimumVersion 2.0.1 -Force
-        runas.exe /savecred /user:administrator Install-Module -Name SqlChangeAutomation
-        runas.exe /savecred /user:administrator Import-Module SqlChangeAutomation
+        runas.exe /savecred /user:administrator "Install-Module -Name SqlChangeAutomation"
+        runas.exe /savecred /user:administrator "Import-Module SqlChangeAutomation"
 
