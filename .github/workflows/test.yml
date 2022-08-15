@@ -15,7 +15,7 @@ jobs:
     - name: Test
       run: |
         runas.exe /savecred /user:administrator Install-Module -Name SqlChangeAutomation
-        Import-Module SqlChangeAutomation
+        runas.exe /savecred /user:administrator Import-Module SqlChangeAutomation
     - name: Checkout tools repo
       uses: actions/checkout@v3
       with:
