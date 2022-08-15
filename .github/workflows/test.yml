@@ -18,6 +18,13 @@ jobs:
         repository: Maksym-Popovkin/git_test
         #token: ${{ secrets.GH_PAT }}
         path: git_test
+    - name: Test1
+      run: |
+        python --version
+        py -m pip install pyodbc
+        Install-Module -Name PowerShellGet -MinimumVersion 2.0.1 -Force
+        Install-Module -Name SqlChangeAutomation -RunAsAdmin
+        Import-Module SqlChangeAutomation
     - name: Install a SQL Server suite of tools
       uses: potatoqualitee/mssqlsuite@v1.5.1
       with:
@@ -34,6 +41,6 @@ jobs:
         python --version
         py -m pip install pyodbc
         Install-Module -Name PowerShellGet -MinimumVersion 2.0.1 -Force
-        runas.exe /savecred /user:administrator "Install-Module -Name SqlChangeAutomation"
-        runas.exe /savecred /user:administrator "Import-Module SqlChangeAutomation"
+        Install-Module -Name SqlChangeAutomation
+        Import-Module SqlChangeAutomation
 
