@@ -1,8 +1,6 @@
 name: Jekyll site CI
 
 on: [workflow_dispatch]
-  #push:
-   # branches: [ "master" ]
 
 jobs:
   build:
@@ -10,13 +8,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    #- name: Clone code
-     # uses: actions/checkout@v3
-    #- name: Check out my other private repo
-     # uses: actions/checkout@master
-      #with:
-       # repository: Maksym-Popovkin/git_test
-        #token: ${{ secrets.my_pat }}
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -25,11 +16,12 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: Maksym-Popovkin/git_test
+        #token: ${{ secrets.GH_PAT }}
         path: git_test
-    #- name: Install a SQL Server suite of tools
-      #uses: potatoqualitee/mssqlsuite@v1.5.1
-      #with:
-        #install: sqlengine, sqlclient, sqlpackage
+    - name: Install a SQL Server suite of tools
+      uses: potatoqualitee/mssqlsuite@v1.5.1
+      with:
+        install: sqlengine, sqlclient, sqlpackage
     - name: Install Tabular Editor
       run: |
         $TabularEditorUrl = "https://cdn.tabulareditor.com/files/te2/TabularEditor.Portable.zip" 
@@ -37,11 +29,3 @@ jobs:
         Invoke-WebRequest -Uri $TabularEditorUrl -OutFile $DownloadDestination
         Expand-Archive -Path $DownloadDestination -DestinationPath (get-location).Path
         Remove-Item $DownloadDestination
-    - name: test
-      run: |
-        pwd
-        ls
-        cd git_test
-        ls
-        
-      
