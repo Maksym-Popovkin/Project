@@ -21,3 +21,16 @@ jobs:
       uses: potatoqualitee/mssqlsuite@v1.5.1
       with:
         install: sqlengine, sqlclient, sqlpackage
+    - name: Install Tabular Editor
+      run: |
+        $TabularEditorUrl = "https://cdn.tabulareditor.com/files/te2/TabularEditor.Portable.zip" 
+        $DownloadDestination = join-path (get-location) "TabularEditor.zip"
+        Invoke-WebRequest -Uri $TabularEditorUrl -OutFile $DownloadDestination
+        Expand-Archive -Path $DownloadDestination -DestinationPath (get-location).Path
+        Remove-Item $DownloadDestination
+    - name: test
+      run: |
+        pwd
+        ls
+        
+      
