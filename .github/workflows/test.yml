@@ -5,7 +5,7 @@ on: [workflow_dispatch]
 env: 
   REPORT: "Report Demographic - w.o. Roster"
   WORKSPACE: "Features-Presentaion"
-  TABULAR_EDITOR: "TabularEditor.exe"
+  #TABULAR_EDITOR: "TabularEditor.exe"
 
 jobs:
   build:
@@ -35,4 +35,5 @@ jobs:
         Expand-Archive -Path $DownloadDestination -DestinationPath (get-location).Path
         Remove-Item $DownloadDestination
         echo $TABULAR_EDITOR
+        $TABULAR_EDITOR = "TabularEditor.exe"
         $p = Start-Process -FilePath $TABULAR_EDITOR
