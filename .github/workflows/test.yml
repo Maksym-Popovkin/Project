@@ -17,14 +17,15 @@ jobs:
       #with:
        # repository: Maksym-Popovkin/git_test
         #token: ${{ secrets.my_pat }}
-    - uses: actions/checkout@v2
-    - name: Checkout private actions
-      uses: vweevers/multi-checkout-action@v1
+    - name: Checkout
+      uses: actions/checkout@v3
       with:
-        #token: ${{ secrets.GITHUB_MACHINE_TOKEN }}
-       repositories: |
-         Maksym-Popovkin/git_test
-         Maksym-Popovkin/Project
+        path: master
+    - name: Checkout tools repo
+      uses: actions/checkout@v3
+      with:
+        repository: Maksym-Popovkin/git_test
+        path: git_test
     #- name: Install a SQL Server suite of tools
       #uses: potatoqualitee/mssqlsuite@v1.5.1
       #with:
@@ -38,7 +39,6 @@ jobs:
         Remove-Item $DownloadDestination
     - name: test
       run: |
-        cd ..
         pwd
         ls
         
