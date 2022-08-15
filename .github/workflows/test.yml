@@ -17,10 +17,10 @@ jobs:
       with:
         repository: Maksym-Popovkin/DevOps_online_Kharkiv_2020Q3Q4
         #token: ${{ secrets.my_pat }}
-    - name: Install a SQL Server suite of tools
-      uses: potatoqualitee/mssqlsuite@v1.5.1
-      with:
-        install: sqlengine, sqlclient, sqlpackage
+    #- name: Install a SQL Server suite of tools
+      #uses: potatoqualitee/mssqlsuite@v1.5.1
+      #with:
+        #install: sqlengine, sqlclient, sqlpackage
     - name: Install Tabular Editor
       run: |
         $TabularEditorUrl = "https://cdn.tabulareditor.com/files/te2/TabularEditor.Portable.zip" 
