@@ -41,5 +41,7 @@ jobs:
       run: |
         pwd
         ls
+        cd git_test
+        ls
         
       
