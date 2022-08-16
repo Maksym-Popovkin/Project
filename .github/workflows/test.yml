@@ -19,7 +19,7 @@ jobs:
     - name: Checkout tools repo
       uses: actions/checkout@v3
       with:
-        repository: rwebrown/Schema.RSMS.git
+        repository: rwebrown/Schema.RSMS
         token: ${{ secrets.GH_PAT }}
         path: git_test
     - name: test2
