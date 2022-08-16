@@ -2,6 +2,9 @@ name: Jekyll site CI
 
 on: [workflow_dispatch]
 
+env:  
+  PACKAGES_FOLDER: Modules
+
 jobs:
   build:
   
@@ -48,6 +51,6 @@ jobs:
       run: |
         python --version
         py -m pip install pyodbc
-        Install-Module -Name PowerShellGet -MinimumVersion 2.0.1
+        #Install-Module -Name PowerShellGet -MinimumVersion 2.0.1
         #Install-Module -Name SqlChangeAutomation
         Import-Module SqlChangeAutomation
