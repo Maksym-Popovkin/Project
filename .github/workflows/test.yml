@@ -36,11 +36,25 @@ jobs:
         Invoke-WebRequest -Uri $TabularEditorUrl -OutFile $DownloadDestination
         Expand-Archive -Path $DownloadDestination -DestinationPath (get-location).Path
         Remove-Item $DownloadDestination
+    
+    - name: Make Install Modules Folder
+      run: New-Item "$PSScriptRoot\${env:PACKAGES_FOLDER}" -ItemType Directory -Force
+      shell: powershell    
+
+    - name: Install Redgate Tooling
+      run: |
+        $LocalModules = "$PSScriptRoot\${env:PACKAGES_FOLDER}"
+
+        Get-PackageProvider NuGet -ForceBootstrap | Out-Null
+        Import-PackageProvider PowerShellGet 
+        Save-Module -Name PowerShellGet -Path $LocalModules -MinimumVersion 1.6 -Force -ErrorAction SilentlyContinue
+
+        Save-Module -Name SqlChangeAutomation -Path $LocalModules -Force -ErrorAction Stop -AcceptLicense        
+      shell: powershell  
     - name: Test
       run: |
         python --version
         py -m pip install pyodbc
-        Install-Module -Name PowerShellGet -MinimumVersion 2.0.1 -Force
-        Install-Module -Name SqlChangeAutomation
+        Install-Module -Name PowerShellGet -MinimumVersion 2.0.1
+        #Install-Module -Name SqlChangeAutomation
         Import-Module SqlChangeAutomation
-
