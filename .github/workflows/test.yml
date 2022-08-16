@@ -35,7 +35,6 @@ jobs:
     
     - name: Make Install Modules Folder
       run: New-Item "$PSScriptRoot\${env:PACKAGES_FOLDER}" -ItemType Directory -Force
-      shell: powershell    
 
     - name: Install Redgate Tooling
       run: |
@@ -46,7 +45,6 @@ jobs:
         Save-Module -Name PowerShellGet -Path $LocalModules -MinimumVersion 1.6 -Force -ErrorAction SilentlyContinue
 
         Save-Module -Name SqlChangeAutomation -Path $LocalModules -Force -ErrorAction Stop -AcceptLicense        
-      shell: powershell  
     - name: Test
       run: |
         python --version
@@ -60,4 +58,3 @@ jobs:
         $env:PSModulePath = "$LocalModules;$env:PSModulePath"
 
         Import-Module SqlChangeAutomation
-      shell: powershell 
