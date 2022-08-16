@@ -53,4 +53,11 @@ jobs:
         py -m pip install pyodbc
         #Install-Module -Name PowerShellGet -MinimumVersion 2.0.1
         #Install-Module -Name SqlChangeAutomation
+        #Import-Module SqlChangeAutomation
+    - name: Build Redgate Packages      
+      run: |
+        $LocalModules = "$PSScriptRoot\${env:PACKAGES_FOLDER}"
+        $env:PSModulePath = "$LocalModules;$env:PSModulePath"
+
         Import-Module SqlChangeAutomation
+      shell: powershell 
