@@ -1,6 +1,11 @@
 name: Jekyll site CI
 
-on: [workflow_dispatch]
+on:
+  push:
+    branches:
+      - "master"
+    paths:
+      - 'pet/**'
 
 env:  
   PACKAGES_FOLDER: Modules
