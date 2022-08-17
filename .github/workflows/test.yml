@@ -15,15 +15,9 @@ jobs:
       uses: actions/checkout@v3
       with:
         path: master
-    
-    - name: Checkout tools repo
-      uses: actions/checkout@v3
-      with:
-        repository: rwebrown/Schema.RSMS
-        token: ${{ secrets.GH_PAT }}
-        path: git_test
     - name: test2
       run: |
+        echo ${{ github.run_number }}
         ls
         cd git_test
         ls
