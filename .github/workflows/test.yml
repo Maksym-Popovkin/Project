@@ -16,17 +16,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v2
+
+    - name: Change text file
+      run: |
+        echo "Modified" > new.txt
+
+    - name: Change file in directory
+      run: |
+        echo "Changed" > pet/new.txt
+
     - name: Verify Changed files
       uses: tj-actions/verify-changed-files@v10.1
-      id: verify-changed-adminapp
+      id: verify-changed-files
       with:
         files: |
-          pet/**
+           *.txt
+           pet
+           action.yml
+           **/*.py
+           **/*.jpeg
+           *.sql
 
     - name: Run step only when files change.
-      if: steps.verify-changed-adminapp.outputs.files_changed == 'true'
+      if: steps.verify-changed-files.outputs.files_changed == 'true'
       run: |
         echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
         # Outputs: "Changed files: new.txt test_directory/new.txt"  
