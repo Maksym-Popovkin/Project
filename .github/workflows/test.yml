@@ -30,7 +30,6 @@ jobs:
       shell: pwsh
       run: |
         $tenant_id = ${{ secrets.TEST }}
-        echo $tenant_id
     - name: backend tests
       if: steps.filter.outputs.src == 'true'
       run: echo "true"
