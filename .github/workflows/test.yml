@@ -33,7 +33,7 @@ jobs:
       with:
         files: |
            *.txt
-           pet
+           pet/**
            action.yml
            **/*.py
            **/*.jpeg
@@ -42,7 +42,7 @@ jobs:
     - name: Run step only when files change.
       if: steps.verify-changed-admin.outputs.files_changed == 'true'
       run: |
-        echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
+        echo "Changed files: ${{ steps.verify-changed-admin.outputs.changed_files }}"
         # Outputs: "Changed files: new.txt test_directory/new.txt"  
     - name: test2
       run: |
