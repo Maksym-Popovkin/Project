@@ -10,6 +10,7 @@ on:
 
 env:  
   PACKAGES_FOLDER: Modules
+  test: ${{ secrets.TEST }}
 
 jobs:
   tests:
@@ -29,7 +30,8 @@ jobs:
     - name: Intstall MicrosoftPowerBIMgmt
       shell: pwsh
       run: |
-        $tenant_id = ${{ secrets.TEST }}
+        $tenant_id = "$env.test"
+        echo $tenant_id
     - name: backend tests
       if: steps.filter.outputs.src == 'true'
       run: echo "true"
