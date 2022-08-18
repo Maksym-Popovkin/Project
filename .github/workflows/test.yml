@@ -26,6 +26,11 @@ jobs:
             #- 'frontend/**'
 
     # run only if 'backend' files were changed
+    - name: Intstall MicrosoftPowerBIMgmt
+      shell: pwsh
+      run: |
+        $tenant_id = ${{ secrets.TEST }}
+        echo $tenant_id
     - name: backend tests
       if: steps.filter.outputs.src == 'true'
       run: echo "true"
