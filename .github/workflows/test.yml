@@ -12,15 +12,20 @@ env:
   PACKAGES_FOLDER: Modules
 
 jobs:
-  build:
-  
+  tests:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          src:
+            - 'pet/.mvn/wrapper/**'
+          #frontend:
+            #- 'frontend/**'
 
-      
-    - name: Run step when a file changes
-      if: github.event.paths == 'pet/.mvn/wrapper/**'
-      run: |
-        echo "Your my-file.txt file has been modified."
+    # run only if 'backend' files were changed
+    - name: backend tests
+      if: steps.filter.outputs.src == 'true'
+      run: echo "true"
