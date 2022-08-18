@@ -18,14 +18,21 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Verify Changed files
+      uses: tj-actions/verify-changed-files@v10.1
+      id: verify-changed-adminapp
       with:
-        path: master
+        files: |
+          pet/**
+
+    - name: Run step only when files change.
+      if: steps.verify-changed-adminapp.outputs.files_changed == 'true'
+      run: |
+        echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
+        # Outputs: "Changed files: new.txt test_directory/new.txt"  
     - name: test2
       run: |
         echo ${{ github.run_number }}
-        ls
-        cd git_test
-        ls
     - name: Install a SQL Server suite of tools
       uses: potatoqualitee/mssqlsuite@v1.5.1
       with:
