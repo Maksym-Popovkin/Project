@@ -21,6 +21,6 @@ jobs:
 
       
     - name: Run step when a file changes
-      if: github.event.paths == 'pet/.mvn/wrapper/*'
+      if: github.event.paths == 'pet/.mvn/wrapper/**'
       run: |
         echo "Your my-file.txt file has been modified."
