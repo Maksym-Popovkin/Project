@@ -4,16 +4,9 @@ on:
   push:
     branches:
       - "master"
-  workflow_call:
-    inputs:
-      username:
-        required: true
-        type: string
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/action
-        with:
-          run_number: ${{ inputs.username }}
+    uses: ./.github/workflows/action.yaml
+    with:
+      run_number: ${{ github.run_number }}
