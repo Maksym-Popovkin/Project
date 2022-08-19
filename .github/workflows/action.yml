@@ -1,8 +1,14 @@
 name: 'action'
 #on: pull_request
-on: 
+on:
   workflow_call:
   workflow_dispatch:
+    inputs: 
+      image_tag:
+        default: ${{ github.run_number }}
+        description: "Taf for ACR image"
+    
+  
 
 jobs:
   branch-naming-rules:
@@ -10,5 +16,5 @@ jobs:
     steps:
       - name: test
         run: |
-          echo ${{ github.run_number }}
+          echo ${{ github.event.inputs.name }}
       
