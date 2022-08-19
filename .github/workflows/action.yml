@@ -13,7 +13,11 @@ jobs:
   branch-naming-rules:
     runs-on: ubuntu-latest
     steps:
+      - name: setup varible
+        if: "${{ github.event.inputs.image_tag == '' }}"
+        env:
+          image: ${{ github.run_number }}
       - name: test
         run: |
-          echo ${{ github.event.inputs.image_tag }}
+          echo ${{ env.image }}
       
