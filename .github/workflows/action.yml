@@ -1,11 +1,6 @@
 name: 'action'
 #on: pull_request
 on: 
-  workflow_call:
-    inputs:
-      run_number:
-        required: true
-        type: string
   workflow_dispatch:
 
 jobs:
@@ -14,5 +9,5 @@ jobs:
     steps:
       - name: test
         run: |
-          echo ${{ input.run_number }}
+          echo ${{ github.run_number }}
       
