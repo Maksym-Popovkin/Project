@@ -8,5 +8,5 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/action.yml
-    #with:
-      #run_number: ${{ github.run_number }}
+    with:
+      run_number: ${{ github.run_number }}
