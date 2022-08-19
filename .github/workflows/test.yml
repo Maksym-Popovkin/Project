@@ -3,15 +3,9 @@ name: Jekyll site CI
 on: push
 
 jobs:
-   example-job:
-      runs-on: ubuntu-latest
-      steps:
-         - name: Set imagePullSecret
-           uses: azure/k8s-create-secret@v2
-           with:
-              namespace: 'car-webapp'
-              secret-name: 'car_web_app_acr_secret'
-              container-registry-url: 'sistestacr.azurecr.io'
-              container-registry-username: 'sistestacr'
-              container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-           id: create-secret
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/action
+        with:
+          run_number: ${{ github.run_number }}
