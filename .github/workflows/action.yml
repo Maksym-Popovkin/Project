@@ -6,6 +6,7 @@ on:
       run_number:
         required: true
         type: string
+  workflow_dispatch:
 
 jobs:
   branch-naming-rules:
