@@ -14,5 +14,5 @@ jobs:
     steps:
       - name: test
         run: |
-          echo ${{ run_number }}
+          echo ${{ github.run_number }}
       
