@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs: 
       image_tag:
-        default: ${{ github.run_number }}
+        default: "latest"
         description: "Tag for ACR image"
     
   
