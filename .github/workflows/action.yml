@@ -13,5 +13,5 @@ jobs:
     steps:
       - name: test
         run: |
-          echo run_number
+          echo ${{run_number}}
       
