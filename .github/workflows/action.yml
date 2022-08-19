@@ -1,6 +1,11 @@
 name: 'action'
 #on: pull_request
-on: [workflow_dispatch]
+on: 
+  workflow_call:
+    inputs:
+      run_number:
+        required: true
+        type: string
 
 jobs:
   branch-naming-rules:
