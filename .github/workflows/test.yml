@@ -1,6 +1,11 @@
 name: Jekyll site CI
 
-on: push
+on:
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -8,4 +13,4 @@ jobs:
     steps:
       - uses: ./.github/workflows/action
         with:
-          run_number: ${{ github.run_number }}
+          run_number: ${{ inputs.username }}
