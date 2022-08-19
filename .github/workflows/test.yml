@@ -1,37 +1,17 @@
 name: Jekyll site CI
 
-on:
-  push:
-    branches:
-      - "master"
-    paths:
-      - 'pet/**'
-  workflow_dispatch:
-
-env:  
-  PACKAGES_FOLDER: Modules
-  test: ${{ secrets.TEST }}
+on: push
 
 jobs:
-  tests:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: dorny/paths-filter@v2
-      id: filter
-      with:
-        filters: |
-          src:
-            - 'pet/.mvn/wrapper/**'
-          #frontend:
-            #- 'frontend/**'
-
-    # run only if 'backend' files were changed
-    - name: Intstall MicrosoftPowerBIMgmt
-      shell: pwsh
-      run: |
-        $tenant_id = "$env.test"
-        echo $tenant_id
-    - name: backend tests
-      if: steps.filter.outputs.src == 'true'
-      run: echo "true"
+   example-job:
+      runs-on: ubuntu-latest
+      steps:
+         - name: Set imagePullSecret
+           uses: azure/k8s-create-secret@v2
+           with:
+              namespace: 'car-webapp'
+              secret-name: 'car_web_app_acr_secret'
+              container-registry-url: 'sistestacr.azurecr.io'
+              container-registry-username: 'sistestacr'
+              container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+           id: create-secret
