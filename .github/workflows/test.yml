@@ -14,6 +14,7 @@ jobs:
       - id: step1
         run: echo "::set-output name=test::${{ github.run_number }}"
   build:
+    needs: pre-build
     uses: ./.github/workflows/action.yml
     with:
       acr_image_tag: ${{needs.pre-build.outputs.output1}}
