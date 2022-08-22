@@ -6,7 +6,12 @@ on:
       - "master"
 
 jobs:
+  pre-build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: setup default variable
+      run: echo "image=${{ github.run_number }}" >> $GITHUB_ENV
   build:
     uses: ./.github/workflows/action.yml
-    #with:
-      #run_number: ${{ github.run_number }}
+    with:
+      acr_image_tag: ${{ env.image }}
