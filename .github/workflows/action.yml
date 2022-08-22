@@ -4,6 +4,7 @@ on:
   workflow_call:
     inputs: 
       acr_image_tag:
+        required: true
         type: string
     outputs:
       exit_code:
@@ -23,13 +24,13 @@ jobs:
       output: ${{ steps.step.outputs.exit_code }}
     steps:
       - name: setup varible
-        if: "${{ github.event.inputs.image_tag == '' &&  github.event.inputs.acr_image_tag != ''}}"
+        if: "${{ github.event.inputs.image_tag == '' &&  github.event.inputs.acr_image_tag != 'rollback'}}"
         run: echo "image=${{ inputs.acr_image_tag }}" >> $GITHUB_ENV
       - name: setup custom varible
         if: "${{ github.event.inputs.image_tag != '' }}"
         run: echo "image=${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
       - name: setup secret
-        if: "${{ github.event.inputs.acr_image_tag == '' }}"
+        if: "${{ github.event.inputs.acr_image_tag == 'rollback' }}"
         run: echo "image=${{ secrets.CURRENT_IMAGE_VERSION }}" >> $GITHUB_ENV
       - name: test
         run: |
