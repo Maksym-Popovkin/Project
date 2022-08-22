@@ -38,4 +38,4 @@ jobs:
     if: needs.build.outputs.exit_code != 0
     uses: ./.github/workflows/action.yml
     with:
-      acr_image_tag: ${{needs.pre-build.outputs.output2}}
+      acr_image_tag: ${{ secrets.CURRENT_IMAGE_VERSION }}
