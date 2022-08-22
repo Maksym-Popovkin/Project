@@ -32,6 +32,9 @@ jobs:
       - name: test
         run: |
           echo ${{ env.image }}
+      - name: setup secret
+        if: "${{ github.event.inputs.acr_image_tag == '' }}"
+        run: echo ${{ secrets.CURRENT_IMAGE_VERSION }}
       - id: step
         run: echo ::set-output name=exit_code::1
       
