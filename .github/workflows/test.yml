@@ -9,15 +9,15 @@ jobs:
   pre-build:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.step1.outputs.test }}
+      output: ${{ steps.step.outputs.run_number }}
     steps:
       - id: step1
-        run: echo "::set-output name=test::${{ github.run_number }}"
+        run: echo "::set-output name=run_number::${{ github.run_number }}"
   build:
     needs: pre-build
     uses: ./.github/workflows/action.yml
     with:
-      acr_image_tag: ${{needs.pre-build.outputs.output1}}
+      acr_image_tag: ${{needs.pre-build.outputs.output}}
   test:
     runs-on: ubuntu-latest
     needs: [build]
