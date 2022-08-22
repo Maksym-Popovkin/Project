@@ -18,6 +18,7 @@ jobs:
     uses: ./.github/workflows/action.yml
     with:
       acr_image_tag: ${{needs.pre-build.outputs.output}}
+    
   test:
     runs-on: ubuntu-latest
     needs: [build]
@@ -32,4 +33,4 @@ jobs:
     if: needs.build.outputs.exit_code != 0
     uses: ./.github/workflows/action.yml
     with:
-      acr_image_tag: ${{needs.pre-build.outputs.output}}
+      acr_image_tag: ${{ secrets.CURRENT_IMAGE_VERSION }}
