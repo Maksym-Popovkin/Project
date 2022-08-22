@@ -32,3 +32,5 @@ jobs:
     needs: [test, build, pre-build]
     if: needs.build.outputs.exit_code != 0
     uses: ./.github/workflows/action.yml
+    with:
+      acr_image_tag: "rollback"
