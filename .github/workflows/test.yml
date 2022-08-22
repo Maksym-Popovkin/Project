@@ -11,7 +11,7 @@ jobs:
     outputs:
       output: ${{ steps.step.outputs.run_number }}
     steps:
-      - id: step1
+      - id: step
         run: echo "::set-output name=run_number::${{ github.run_number }}"
   build:
     needs: pre-build
