@@ -7,22 +7,17 @@ on:
 
 jobs:
   pre-build:
-    env: 
-      GITHUB_TOKEN: ${{ secrets.CURRENT_IMAGE_VERSION }}
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.step.outputs.run_number }}
-      output2: ${{ steps.step2.outputs.token }}
+      output: ${{ steps.step.outputs.run_number }}
     steps:
       - id: step
         run: echo "::set-output name=run_number::${{ github.run_number }}"
-      - id: step2
-        run: echo "::set-output name=token::${{ env.GITHUB_TOKEN }}"
   build:
     needs: pre-build
     uses: ./.github/workflows/action.yml
     with:
-      acr_image_tag: ${{needs.pre-build.outputs.output1}}
+      acr_image_tag: ${{needs.pre-build.outputs.output}}
     
   test:
     runs-on: ubuntu-latest
@@ -37,5 +32,3 @@ jobs:
     needs: [test, build, pre-build]
     if: needs.build.outputs.exit_code != 0
     uses: ./.github/workflows/action.yml
-    with:
-      acr_image_tag: ${{ secrets.CURRENT_IMAGE_VERSION }}
