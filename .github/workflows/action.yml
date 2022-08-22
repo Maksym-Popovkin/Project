@@ -19,8 +19,7 @@ jobs:
     steps:
       - name: setup varible
         if: "${{ github.event.inputs.image_tag == '' }}"
-        run: echo The username is ${{ inputs.acr_image_tag }}
-        #run: echo "image=${{ github.run_number }}" >> $GITHUB_ENV
+        run: echo "image=${{ inputs.acr_image_tag }}" >> $GITHUB_ENV
       - name: setup custom varible
         if: "${{ github.event.inputs.image_tag != '' }}"
         run: echo "image=${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
