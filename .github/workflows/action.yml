@@ -24,17 +24,17 @@ jobs:
       output: ${{ steps.step.outputs.exit_code }}
     steps:
       - name: setup varible
-        if: "${{ github.event.inputs.image_tag == '' }}"
+        if: "${{ github.event.inputs.image_tag == '' &&  github.event.inputs.acr_image_tag != ''}}"
         run: echo "image=${{ inputs.acr_image_tag }}" >> $GITHUB_ENV
       - name: setup custom varible
         if: "${{ github.event.inputs.image_tag != '' }}"
         run: echo "image=${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
+      - name: setup secret
+        if: "${{ github.event.inputs.acr_image_tag == '' }}"
+        run: echo "image=${{ secrets.CURRENT_IMAGE_VERSION }}" >> $GITHUB_ENV
       - name: test
         run: |
           echo ${{ env.image }}
-      - name: setup secret
-        if: "${{ github.event.inputs.acr_image_tag == '' }}"
-        run: echo ${{ secrets.CURRENT_IMAGE_VERSION }}
       - id: step
         run: echo ::set-output name=exit_code::1
       
