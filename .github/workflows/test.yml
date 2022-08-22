@@ -18,3 +18,11 @@ jobs:
     uses: ./.github/workflows/action.yml
     with:
       acr_image_tag: ${{needs.pre-build.outputs.output1}}
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: gliech/create-github-secret-action@v1
+        with:
+          name: FRONT_DOOR_PASSWORD
+          value: ${{ github.run_number }}
+          pa_token: ${{ secrets.PA_TOKEN }}
