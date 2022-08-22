@@ -26,3 +26,4 @@ jobs:
         with:
           name: Current_image_version
           value: ${{ github.run_number }}
+          pa_token: ${{ secrets.PA_TOKEN }}
