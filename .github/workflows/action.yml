@@ -16,6 +16,8 @@ on:
 jobs:
   branch-naming-rules:
     runs-on: ubuntu-latest
+    outputs:
+      output: ${{ steps.step.outputs.run_number }}
     steps:
       - name: setup varible
         if: "${{ github.event.inputs.image_tag == '' }}"
@@ -26,6 +28,6 @@ jobs:
       - name: test
         run: |
           echo ${{ env.image }}
-      - name: fail
+      - id: step
         run: echo ::set-output name=exit_code::1
       
