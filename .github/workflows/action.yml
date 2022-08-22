@@ -2,6 +2,10 @@ name: 'action'
 #on: pull_request
 on:
   workflow_call:
+    inputs: 
+      acr_image_tag:
+        required: true
+        type: string
   workflow_dispatch:
     inputs: 
       image_tag:
@@ -15,7 +19,8 @@ jobs:
     steps:
       - name: setup varible
         if: "${{ github.event.inputs.image_tag == '' }}"
-        run: echo "image=${{ github.run_number }}" >> $GITHUB_ENV
+        run: echo The username is ${{ inputs.acr_image_tag }}
+        #run: echo "image=${{ github.run_number }}" >> $GITHUB_ENV
       - name: setup custom varible
         if: "${{ github.event.inputs.image_tag != '' }}"
         run: echo "image=${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
