@@ -24,15 +24,15 @@ jobs:
       output: ${{ steps.step.outputs.exit_code }}
     steps:
       - name: test2
-        run: echo ${{ github.event.inputs.acr_image_tag }}
+        run: echo ${{ inputs.acr_image_tag }}
       - name: setup varible
-        if: "${{ github.event.inputs.image_tag == '' &&  github.event.inputs.acr_image_tag != 'rollback'}}"
+        if: "${{ github.event.inputs.image_tag == '' &&  inputs.acr_image_tag != 'rollback'}}"
         run: echo "image=${{ inputs.acr_image_tag }}" >> $GITHUB_ENV
       - name: setup custom varible
         if: "${{ github.event.inputs.image_tag != '' }}"
         run: echo "image=${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
       - name: setup secret
-        if: "${{ github.event.inputs.acr_image_tag == 'rollback' }}"
+        if: "${{ inputs.acr_image_tag == 'rollback' }}"
         run: echo "image=${{ secrets.CURRENT_IMAGE_VERSION }}" >> $GITHUB_ENV
       - name: test
         run: |
