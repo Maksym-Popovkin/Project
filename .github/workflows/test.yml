@@ -27,3 +27,9 @@ jobs:
           name: Current_image_version
           value: ${{ github.run_number }}
           pa_token: ${{ secrets.PA_TOKEN }}
+  post:
+    needs: [test, build]
+    if: needs.build.outputs.exit_code != 0
+    uses: ./.github/workflows/action.yml
+    with:
+      acr_image_tag: ${{needs.pre-build.outputs.output}}
