@@ -26,4 +26,6 @@ jobs:
       - name: test
         run: |
           echo ${{ env.image }}
+      - name: fail
+        run: echo ::set-output name=exit_code::1
       
