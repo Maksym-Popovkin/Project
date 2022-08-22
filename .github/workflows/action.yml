@@ -6,6 +6,10 @@ on:
       acr_image_tag:
         required: true
         type: string
+    outputs:
+      exit_code:
+        value: ${{ jobs.branch-naming-rules.outputs.output }}
+      
   workflow_dispatch:
     inputs: 
       image_tag:
