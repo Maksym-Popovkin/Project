@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs: 
       acr_image_tag:
-        required: true
+        required: false
         type: string
     outputs:
       exit_code:
