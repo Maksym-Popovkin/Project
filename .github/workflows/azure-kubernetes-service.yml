@@ -33,8 +33,6 @@ jobs:
     
     # Logs in with your Azure credentials
     - name: Azure login
-      uses: azure/login@v1.4.3
-      with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      run: |
+        az login --service-principal -u a4ea290c-74c6-4d87-a2d2-460649d0fea4 -p IPp8Q~xRTUA74_Ta4futcs0y_AX2uU7.-WVf3bzr --tenant b41b72d0-4e9f-4c26-8a69-f949f367c91d
+        az account show
