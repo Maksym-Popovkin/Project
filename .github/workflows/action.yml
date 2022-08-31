@@ -27,13 +27,13 @@ jobs:
         run: echo ${{ inputs.acr_image_tag }}
       - name: setup varible
         if: "${{ github.event.inputs.image_tag == '' &&  inputs.acr_image_tag != 'rollback'}}"
-        run: echo "image=${{ inputs.acr_image_tag }}" >> $GITHUB_ENV
+        run: echo "image=v.0.0.${{ inputs.acr_image_tag }}" >> $GITHUB_ENV
       - name: setup custom varible
         if: "${{ github.event.inputs.image_tag != '' }}"
-        run: echo "image=${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
+        run: echo "image=v.0.0.${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
       - name: setup secret
         if: "${{ inputs.acr_image_tag == 'rollback' }}"
-        run: echo "image=${{ secrets.CURRENT_IMAGE_VERSION }}" >> $GITHUB_ENV
+        run: echo "image=v.0.0.${{ secrets.CURRENT_IMAGE_VERSION }}" >> $GITHUB_ENV
       - name: test
         run: |
           echo ${{ env.image }}
