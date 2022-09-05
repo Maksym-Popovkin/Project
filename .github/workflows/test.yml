@@ -1,36 +1,39 @@
-name: Jekyll site CI
+name: CI
 
 on:
-  push:
-    branches:
-      - "master"
+  workflow_dispatch:
+    inputs: 
+      image_tag:
+        required: true
+      logLevel:
+        description: 'Log level'
+        required: true
+        type: choice
+        options:
+        - Client
+        - Admin
+        - Both
 
 jobs:
-  pre-build:
+  buildImage:
     runs-on: ubuntu-latest
-    outputs:
-      output: ${{ steps.step.outputs.run_number }}
     steps:
-      - id: step
-        run: echo "::set-output name=run_number::${{ github.run_number }}"
-  build:
-    needs: pre-build
-    uses: ./.github/workflows/action.yml
-    with:
-      acr_image_tag: ${{needs.pre-build.outputs.output}}
     
-  test:
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-      - uses: gliech/create-github-secret-action@v1
-        with:
-          name: Current_image_version
-          value: ${{ github.run_number }}
-          pa_token: ${{ secrets.PA_TOKEN }}
-  post:
-    needs: [test, build, pre-build]
-    if: needs.build.outputs.exit_code != 0
-    uses: ./.github/workflows/action.yml
-    with:
-      acr_image_tag: "rollback"
+    # Checks out the repository 
+    - uses: actions/checkout@v3
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          adminapp:
+            - 'ui/CARWebApp/CARWebApp.Admin/**'
+          clientapp:
+            - 'ui/CARWebApp/CARWebApp.Client/**'
+    
+    - name: setup default variable
+      if: "${{ github.event.inputs.image_tag == '' }}"
+      run: echo "image=v0.0.${{ github.run_number }}" >> $GITHUB_ENV
+    - name: setup custom variable
+      if: "${{ github.event.inputs.image_tag != '' }}"
+      run: echo "image=${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
+      
