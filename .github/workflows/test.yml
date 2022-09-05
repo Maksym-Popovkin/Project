@@ -6,7 +6,7 @@ on:
       image_tag:
         description: 'ACR image tag'
         required: true
-      logLevel:
+      selecting_app:
         description: 'Which app need build'
         required: true
         default: 'Both'
@@ -38,4 +38,7 @@ jobs:
     - name: setup custom variable
       if: "${{ github.event.inputs.image_tag != '' }}"
       run: echo "image=${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
+    - name: Build and push Admin image to ACR
+      if: (steps.filter.outputs.adminapp == 'true' && github.event.inputs.image_tag == '') || (github.event.inputs.image_tag != '' && github.event.inputs.selecting_app == 'Admin')
+      run: echo true
       
