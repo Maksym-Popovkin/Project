@@ -39,6 +39,6 @@ jobs:
       if: "${{ github.event.inputs.image_tag != '' }}"
       run: echo "image=${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
     - name: Build and push Admin image to ACR
-      if: (steps.filter.outputs.adminapp == 'true' && github.event.inputs.image_tag == '') || (github.event.inputs.image_tag != '' && github.event.inputs.selecting_app == 'Admin')
+      if: (steps.filter.outputs.adminapp == 'true' && github.event.inputs.image_tag == '') || (github.event.inputs.image_tag != '' && (github.event.inputs.selecting_app == 'Admin' || github.event.inputs.selecting_app == 'Both'))
       run: echo true
       
