@@ -4,10 +4,12 @@ on:
   workflow_dispatch:
     inputs: 
       image_tag:
+        description: 'ACR image tag'
         required: true
       logLevel:
-        description: 'Log level'
+        description: 'Which app need build'
         required: true
+        default: 'Both'
         type: choice
         options:
         - Client
