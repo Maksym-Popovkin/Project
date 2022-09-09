@@ -1,18 +1,27 @@
 name: 'action'
 #on: pull_request
 on:
-  workflow_call:
-    inputs: 
-      acr_image_tag:
-        required: true
-        type: string
-    outputs:
-      exit_code:
-        value: ${{ jobs.branch-naming-rules.outputs.output }}
-      
   workflow_dispatch:
-    inputs: 
-      image_tag:
+    inputs:
+      action:
+        required: true
+        type: choice
+        description: 'What would you like to do?'
+        options:
+          - Suspend
+          - Resume
+#   workflow_call:
+#     inputs: 
+#       acr_image_tag:
+#         required: true
+#         type: string
+#     outputs:
+#       exit_code:
+#         value: ${{ jobs.branch-naming-rules.outputs.output }}
+      
+#   workflow_dispatch:
+#     inputs: 
+#       image_tag:
 
     
   
@@ -20,23 +29,26 @@ on:
 jobs:
   branch-naming-rules:
     runs-on: ubuntu-latest
-    outputs:
-      output: ${{ steps.step.outputs.exit_code }}
+#     outputs:
+#       output: ${{ steps.step.outputs.exit_code }}
     steps:
-      - name: test2
-        run: echo ${{ inputs.acr_image_tag }}
-      - name: setup varible
-        if: "${{ github.event.inputs.image_tag == '' &&  inputs.acr_image_tag != 'rollback'}}"
-        run: echo "image=v.0.0.${{ inputs.acr_image_tag }}" >> $GITHUB_ENV
-      - name: setup custom varible
-        if: "${{ github.event.inputs.image_tag != '' }}"
-        run: echo "image=v.0.0.${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
-      - name: setup secret
-        if: "${{ inputs.acr_image_tag == 'rollback' }}"
-        run: echo "image=v.0.0.${{ secrets.CURRENT_IMAGE_VERSION }}" >> $GITHUB_ENV
       - name: test
-        run: |
-          echo ${{ env.image }}
-      - id: step
-        run: echo ::set-output name=exit_code::1
+        if: github.event.schedule != '0 20 * * 1-5' || ${{ inputs.acr_image_tag }} == 'Suspend'
+        run: echo ${{ inputs.action }}
+#       - name: test2
+#         run: echo ${{ inputs.acr_image_tag }}
+#       - name: setup varible
+#         if: "${{ github.event.inputs.image_tag == '' &&  inputs.acr_image_tag != 'rollback'}}"
+#         run: echo "image=v.0.0.${{ inputs.acr_image_tag }}" >> $GITHUB_ENV
+#       - name: setup custom varible
+#         if: "${{ github.event.inputs.image_tag != '' }}"
+#         run: echo "image=v.0.0.${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
+#       - name: setup secret
+#         if: "${{ inputs.acr_image_tag == 'rollback' }}"
+#         run: echo "image=v.0.0.${{ secrets.CURRENT_IMAGE_VERSION }}" >> $GITHUB_ENV
+#       - name: test
+#         run: |
+#           echo ${{ env.image }}
+#       - id: step
+#         run: echo ::set-output name=exit_code::1
       
