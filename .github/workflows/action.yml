@@ -33,7 +33,7 @@ jobs:
 #       output: ${{ steps.step.outputs.exit_code }}
     steps:
       - name: test
-        if: github.event.schedule != '0 20 * * 1-5' || ${{ inputs.acr_image_tag }} == 'Suspend'
+        if: github.event.schedule != '0 20 * * 1-5' && ${{ inputs.acr_image_tag }} == 'Suspend'
         run: echo ${{ inputs.action }}
 #       - name: test2
 #         run: echo ${{ inputs.acr_image_tag }}
