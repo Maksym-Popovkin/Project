@@ -3,7 +3,7 @@ name: 'action'
 on:
   workflow_dispatch:
     inputs:
-      action:
+      actions:
         required: true
         type: choice
         description: 'What would you like to do?'
@@ -33,8 +33,10 @@ jobs:
 #       output: ${{ steps.step.outputs.exit_code }}
     steps:
       - name: test
-        if: github.event.schedule != '0 20 * * 1-5' && ${{ inputs.acr_image_tag }} == 'Suspend'
-        run: echo ${{ inputs.action }}
+        if: github.event.schedule != '0 20 * * 1-5' && ${{ github.event.inputs.actions }} == 'Suspend'
+        run: |
+          echo "action=Suspend" >> $GITHUB_ENV
+          echo ${{ env.action }}
 #       - name: test2
 #         run: echo ${{ inputs.acr_image_tag }}
 #       - name: setup varible
