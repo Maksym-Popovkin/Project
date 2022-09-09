@@ -32,13 +32,14 @@ jobs:
 #     outputs:
 #       output: ${{ steps.step.outputs.exit_code }}
     steps:
-      - name: test
-        if: github.event.schedule != '0 20 * * 1-5' && github.event.schedule != '30 5 * * 1-5'
-        run: |
-          echo "action=${{ github.event.inputs.actions }}" >> $GITHUB_ENV
-          echo ${{ env.action }}
-#       - name: test2
-#         run: echo ${{ inputs.acr_image_tag }}
+      - name: setup Suspend variable
+        if: github.event.schedule == '0 20 * * 1-5' || github.event.inputs.actions == 'Suspend'
+        run: echo "action=Suspend" >> $GITHUB_ENV
+      - name: setup Resume variable
+        if: github.event.schedule == '30 5 * * 1-5' || github.event.inputs.actions == 'Resume'
+        run: echo "action=Resume" >> $GITHUB_ENV  
+      - name: test2
+        run: echo ${{ env.action }}
 #       - name: setup varible
 #         if: "${{ github.event.inputs.image_tag == '' &&  inputs.acr_image_tag != 'rollback'}}"
 #         run: echo "image=v.0.0.${{ inputs.acr_image_tag }}" >> $GITHUB_ENV
