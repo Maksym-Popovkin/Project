@@ -33,7 +33,7 @@ jobs:
 #       output: ${{ steps.step.outputs.exit_code }}
     steps:
       - name: test
-        if: github.event.schedule != '0 20 * * 1-5' $$ github.event.schedule != '30 5 * * 1-5'
+        if: github.event.schedule != '0 20 * * 1-5' && github.event.schedule != '30 5 * * 1-5'
         run: |
           echo "action=${{ github.event.inputs.actions }}" >> $GITHUB_ENV
           echo ${{ env.action }}
