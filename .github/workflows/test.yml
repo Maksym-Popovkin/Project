@@ -1,44 +1,24 @@
-name: CI
+name: Build and publish nuget artifact
 
 on:
-  workflow_dispatch:
-    inputs: 
-      image_tag:
-        description: 'ACR image tag'
-        required: true
-      selecting_app:
-        description: 'Which app need build'
-        required: true
-        default: 'Both'
-        type: choice
-        options:
-        - Client
-        - Admin
-        - Both
+  push:
+    branches: main
+    paths:
+      - 'src/*/*.Service.Client/*
 
 jobs:
-  buildImage:
+  build_and_publish_nuget_artifact:
     runs-on: ubuntu-latest
     steps:
-    
-    # Checks out the repository 
-    - uses: actions/checkout@v3
-    - uses: dorny/paths-filter@v2
-      id: filter
+    - name: Checkout backend-services repository
+      uses: actions/checkout@v3
       with:
-        filters: |
-          adminapp:
-            - 'ui/CARWebApp/CARWebApp.Admin/**'
-          clientapp:
-            - 'ui/CARWebApp/CARWebApp.Client/**'
-    
-    - name: setup default variable
-      if: "${{ github.event.inputs.image_tag == '' }}"
-      run: echo "image=v0.0.${{ github.run_number }}" >> $GITHUB_ENV
-    - name: setup custom variable
-      if: "${{ github.event.inputs.image_tag != '' }}"
-      run: echo "image=${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
-    - name: Build and push Admin image to ACR
-      if: (steps.filter.outputs.adminapp == 'true' && github.event.inputs.image_tag == '') || (github.event.inputs.image_tag != '' && (github.event.inputs.selecting_app == 'Admin' || github.event.inputs.selecting_app == 'Both'))
-      run: echo true
-      
+        repository: nelnet-factssis/backend-services
+        token: ${{ env.BACKEND_SERVICES_TOKEN }}
+        path: .
+ 
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: |
+          6.0.x
