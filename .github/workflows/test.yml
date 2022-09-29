@@ -2,9 +2,9 @@ name: Build and publish nuget artifact
 
 on:
   push:
-    branches: main
+    branches: master
     paths:
-      - 'src/**'
+      - 'src/*/*Service.Client/*'
 
 jobs:
   build_and_publish_nuget_artifact:
