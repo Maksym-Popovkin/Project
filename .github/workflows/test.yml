@@ -4,7 +4,7 @@ on:
   push:
     branches: main
     paths:
-      - 'src/*/*.Service.Client/*
+      - 'src/*/*.Service.Client/*'
 
 jobs:
   build_and_publish_nuget_artifact:
