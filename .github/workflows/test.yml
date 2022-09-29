@@ -4,18 +4,12 @@ on:
   push:
     branches: main
     paths:
-      - 'src/*/*.Service.Client/*'
+      - 'src/*/*Service.Client/*'
 
 jobs:
   build_and_publish_nuget_artifact:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout backend-services repository
-      uses: actions/checkout@v3
-      with:
-        repository: nelnet-factssis/backend-services
-        token: ${{ env.BACKEND_SERVICES_TOKEN }}
-        path: .
  
     - name: Setup dotnet
       uses: actions/setup-dotnet@v2
