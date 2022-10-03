@@ -11,8 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
  
-    - name: Setup dotnet
-      uses: actions/setup-dotnet@v2
+    - name: Get changed files in the docs folder
+      id: changed-files
+      uses: tj-actions/changed-files@v31
       with:
-        dotnet-version: |
-          6.0.x
+        files: |
+          src/*/*Service.Client/*
+    - name: List all changed files
+      run: |
+        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          echo "$file was changed"
+        done
