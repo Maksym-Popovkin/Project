@@ -35,5 +35,5 @@ jobs:
     strategy:
       matrix:
         sourse: [Admin.Name/Admin.Service.Client, Admin.Name/Admin.Service.Clien, Admin.Name/Admin.Service.Clit]
-    if: contains(needs.job1.outputs.output, matrix.sourse)
+    if: contains(needs.job1.outputs.output, ${{ matrix.sourse }})
     uses: ./.github/workflows/action.yml
