@@ -10,14 +10,7 @@ on:
         options:
           - Suspend
           - Resume
-#   workflow_call:
-#     inputs: 
-#       acr_image_tag:
-#         required: true
-#         type: string
-#     outputs:
-#       exit_code:
-#         value: ${{ jobs.branch-naming-rules.outputs.output }}
+  workflow_call:
       
 #   workflow_dispatch:
 #     inputs: 
