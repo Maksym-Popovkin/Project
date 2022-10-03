@@ -20,7 +20,7 @@ jobs:
       uses: tj-actions/changed-files@v31
       with:
         files: |
-          src/*/*Service.Client/*
+          src/*/*Service.Client
     - name: List all changed files
       run: |
         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
