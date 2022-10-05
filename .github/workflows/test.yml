@@ -20,7 +20,7 @@ jobs:
       uses: tj-actions/changed-files@v31
       with:
         json: true
-        dir_names: "true"
+        dir_names: true
         files: |
             src/*/*Service.Client/*
     - name: List all changed files
