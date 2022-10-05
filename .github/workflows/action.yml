@@ -11,6 +11,13 @@ on:
           - Suspend
           - Resume
   workflow_call:
+    inputs: 
+      source:
+        required: true
+        type: string
+    secrets:
+      AZURE_ARTIFACTS_FEED_URL:
+        required: true
       
 #   workflow_dispatch:
 #     inputs: 
