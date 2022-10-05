@@ -1,35 +1,42 @@
-name: A simple demonstration
-on: push
-
+name: MATRIX TEST BUILD 
+on: 
+ pull_request:
+   branches:
+    - main  # branch that PR targets 
+   paths:
+   # restrict changes to only specific path to avoid deploying any other service
+    - 'src/Services/Services.BackendApi/**'
 jobs:
-  generate_matrix:
-    name: Find services
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: "{\"path\": ${{ steps.generate_matrix.outputs.matrix }} }"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Generate matrix
-        id: generate_matrix
-        uses: ReyahSolutions/matrix-git-generator@v1
-        with:
-          filters: |
-            src/*/*Service.Client/*
-
-  test_service:
-    name: Test service
-    runs-on: ubuntu-latest
-    needs: [generate_matrix]
-    strategy:
-      matrix: ${{fromJson(needs.generate_matrix.outputs.matrix)}}
-      fail-fast: true 
-    steps:
-      # [...] Do what ever you want for each match
-      - name: Example
-        run: |
-          cd ${{ matrix.path }}
-          make test
+ init:
+  runs-on: ubuntu-latest
+  outputs:
+   the_matrix: 
+     ${{ steps.build_matrix.outputs.the_files }}
+  steps:
+  - name: Get changed files
+    id: build_matrix
+    uses: tj-actions/changed-files@v31
+    with:
+      files: |
+        src/*/*Service.Client
+        src/*/version.props
+      separator: ","
+#    - name: build MATRIX
+#      id: build_matrix
+#      run: |
+#        echo "::set-output name=the_files::['file_01', 'file_02', 'file_03']"
+#      shell: pwsh
+ build_files:
+   runs-on: ubuntu-latest
+   needs: [init]
+   strategy:
+      matrix:
+        value: ${{ fromJson(needs.init.outputs.the_matrix) }}
+   steps:
+    - name: build files
+      run: | 
+        echo "Run step against: ${{ matrix.value }}"
+      shell: pwsh
 # name: build
 # on: push
 # jobs:
