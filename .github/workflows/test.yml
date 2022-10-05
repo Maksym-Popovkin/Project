@@ -1,11 +1,9 @@
 name: MATRIX TEST BUILD 
 on: 
- pull_request:
-   branches:
-    - main  # branch that PR targets 
-   paths:
-   # restrict changes to only specific path to avoid deploying any other service
-    - 'src/Services/Services.BackendApi/**'
+ push:
+    branches: master
+    paths:
+      - 'src/*/*Service.Client/*'
 jobs:
  init:
   runs-on: ubuntu-latest
