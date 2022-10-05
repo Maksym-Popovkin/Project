@@ -32,8 +32,8 @@ jobs:
         
   job2:
     needs: job1
-    strategy:
-      matrix:
-        sourse: [Admin.Name/Admin.Service.Client, Admin.Name/Admin.Service.Clit]
-    if: contains(needs.job1.outputs.output, ${{ matrix.sourse }})
-    uses: ./.github/workflows/action.yml
+    runs-on: ubuntu-latest
+    steps:
+    - name: test
+      if: contains(needs.job1.outputs.output, Admin.Name/Admin.Service.Client)
+      uses: ./.github/workflows/action.yml
