@@ -20,7 +20,7 @@ jobs:
         with:
           files: |
             src/*/*Service.Client/*
-          separator: ","
+          #separator: ","
 
 
       - name: List all changed files
