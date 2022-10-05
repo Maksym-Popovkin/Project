@@ -32,11 +32,10 @@ jobs:
         
   job2:
     needs: job1
+    if: contains(needs.job1.outputs.output, 'Admin.Name/Admin.Service.Client')
     runs-on: ubuntu-latest
     steps:
-    - name: test
-      if: contains(needs.job1.outputs.output, 'Admin.Name/Admin.Service.Client')
-      uses: ./.github/workflows/action.yml
+    - uses: ./.github/workflows/action.yml
       with:
         source: "src/Services.Academic/Academic.Service.Client"
         AZURE_ARTIFACTS_FEED_URL: ${{ secrets.PA_TOKEN }}
