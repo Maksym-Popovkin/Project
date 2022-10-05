@@ -11,6 +11,9 @@ jobs:
    the_matrix: 
      ${{ steps.build_matrix.outputs.the_files }}
   steps:
+  - uses: actions/checkout@v3
+    with:
+      fetch-depth: 0
   - name: Get changed files
     id: build_matrix
     uses: tj-actions/changed-files@v31
