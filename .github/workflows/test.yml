@@ -17,7 +17,7 @@ jobs:
       with:
         json: true
         dir_names: true
-        path: src/*/*Service.Client
+
         
     - name: List all changed files
       run: |
