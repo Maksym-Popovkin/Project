@@ -19,7 +19,7 @@ jobs:
       id: changed-files-dir-names
       uses: tj-actions/changed-files@v31
       with:
-#         json: true
+        json: true
         dir_names: true
 #         files: |
 #             src/*/*Service.Client/*
