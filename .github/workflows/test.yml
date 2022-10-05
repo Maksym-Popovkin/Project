@@ -19,10 +19,10 @@ jobs:
       id: changed-files-dir-names
       uses: tj-actions/changed-files@v31
       with:
-        json: true
+#         json: true
         dir_names: true
-        files: |
-            src/*/*Service.Client/*
+#         files: |
+#             src/*/*Service.Client/*
     - name: List all changed files
       run: |
         echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}'
