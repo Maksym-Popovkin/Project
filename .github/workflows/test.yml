@@ -15,10 +15,9 @@ jobs:
       id: changed-files-dir-names
       uses: tj-actions/changed-files@v31
       with:
-        files: |
-            src/*/*Service.Client/*
         json: true
         dir_names: true
+        path: src/*/*Service.Client
         
     - name: List all changed files
       run: |
