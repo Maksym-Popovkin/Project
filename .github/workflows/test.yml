@@ -15,15 +15,17 @@ jobs:
       with:
         fetch-depth: 0 # needed for tj-actions/changed-files
     - name: Get changed files
-      id: changed-files
+      #id: changed-files
+      id: changed-files-dir-names
       uses: tj-actions/changed-files@v31
       with:
         json: true
+        dir_names: "true"
         files: |
             src/*/*Service.Client/*
     - name: List all changed files
       run: |
-        echo '${{ steps.changed-files.outputs.all_changed_files }}'
+        echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}'
     - id: set-matrix
       run: echo "::set-output name=matrix::{\"container\":${{ steps.changed-files.outputs.all_changed_files }}}"
           
