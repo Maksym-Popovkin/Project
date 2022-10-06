@@ -16,7 +16,7 @@ jobs:
       run: |
         RESULT=$(pwd)
         echo $RESULT 
-        echo "::set-output name=connection_string::$RESULT"
+        echo "::set-output name=connection_string::$(pwd)"
       
     - name: test
       run: |
