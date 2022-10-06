@@ -11,7 +11,12 @@ jobs:
         ls -la
         cd *.Client
         ls -la
+        
+    - id: set_connection_string
+      run: echo "::set-output name=connection_string::pwd"
       
+    - name: test
+      run: echo ${{ steps.set_connection_string.outputs.connection_string }}
 
 
 
