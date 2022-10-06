@@ -13,10 +13,14 @@ jobs:
         ls -la
         
     - id: set_connection_string
-      run: echo "::set-output name=connection_string::pwd"
+      run: |
+        RESULT=$(pwd)
+        echo $RESULT 
+        echo "::set-output name=connection_string::$RESULT"
       
     - name: test
-      run: echo ${{ steps.set_connection_string.outputs.connection_string }}
+      run: 
+        echo ${{ steps.set_connection_string.outputs.connection_string }}
 
 
 
