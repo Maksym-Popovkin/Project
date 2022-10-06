@@ -19,8 +19,9 @@ jobs:
         echo "::set-output name=connection_string::$RESULT"
       
     - name: test
-      run: 
-        echo ${{ steps.set_connection_string.outputs.connection_string }}
+      run: |
+        cd ${{ steps.set_connection_string.outputs.connection_string }}
+        ls -la
 
 
 
