@@ -5,8 +5,8 @@ on:
   pull_request_target:
     types:
       - opened
-    paths:
-      - 'src/*/**'
+#     paths:
+#       - 'src/*/**'
 
 jobs:
  # Generate a matrix with a directories which have changed files
