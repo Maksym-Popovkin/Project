@@ -1,7 +1,7 @@
 name: Builds and Tests SIS SDKs
 
 on:
-  pull_request:
+  pull_request_target:
     types:
       - opened
     paths:
