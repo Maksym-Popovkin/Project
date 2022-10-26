@@ -5,7 +5,7 @@ on:
     types:
       - opened
     paths:
-      - 'src/*/**'
+      - 'src/*/*'
 
 jobs:
  # Generate a matrix with a directories which have changed files
