@@ -5,8 +5,8 @@ on:
   pull_request_target:
     types:
       - opened
-#     paths:
-#       - 'src/*/**'
+    paths:
+      - 'src/*/**'
 
 jobs:
  # Generate a matrix with a directories which have changed files
@@ -15,8 +15,8 @@ jobs:
   steps:
     - name: Checkout
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0 
+#       with:
+#         fetch-depth: 0 
         
     # Get all changed files on last commit   
     - name: Get changed files
