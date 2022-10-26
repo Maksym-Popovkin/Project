@@ -1,57 +1,88 @@
-name: 'action'
-#on: pull_request
+name: Builds and Tests SIS SDKs
+
 on:
-  workflow_dispatch:
-    inputs:
-      actions:
-        required: true
-        type: choice
-        description: 'What would you like to do?'
-        options:
-          - Suspend
-          - Resume
-  workflow_call:
-    inputs: 
-      source:
-        required: true
-        type: string
-    secrets:
-      AZURE_ARTIFACTS_FEED_URL:
-        required: true
-      
+  pull_request:
+    types:
+      - opened
+    paths:
+      - 'src/*/*'
+
+jobs:
+ # Generate a matrix with a directories which have changed files
+ check_changed_files:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 
+        
+    # Get all changed files on last commit   
+    - name: Get changed files
+      id: changed-files-dir-names
+      uses: tj-actions/changed-files@v31
+      with:
+        json: true
+        dir_names: true
+        
+    - name: List all changed files
+      run: |
+        echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}'
+
+# name: 'action'
+# #on: pull_request
+# on:
 #   workflow_dispatch:
+#     inputs:
+#       actions:
+#         required: true
+#         type: choice
+#         description: 'What would you like to do?'
+#         options:
+#           - Suspend
+#           - Resume
+#   workflow_call:
 #     inputs: 
-#       image_tag:
+#       source:
+#         required: true
+#         type: string
+#     secrets:
+#       AZURE_ARTIFACTS_FEED_URL:
+#         required: true
+      
+# #   workflow_dispatch:
+# #     inputs: 
+# #       image_tag:
 
     
   
 
-jobs:
-  branch-naming-rules:
-    runs-on: ubuntu-latest
-#     outputs:
-#       output: ${{ steps.step.outputs.exit_code }}
-    steps:
-      - name: setup Suspend variable
-        if: github.event.schedule == '0 20 * * 1-5' || github.event.inputs.actions == 'Suspend'
-        run: echo "action=Suspend" >> $GITHUB_ENV
-      - name: setup Resume variable
-        if: github.event.schedule == '30 5 * * 1-5' || github.event.inputs.actions == 'Resume'
-        run: echo "action=Resume" >> $GITHUB_ENV  
-      - name: test2
-        run: echo ${{ env.action }}
-#       - name: setup varible
-#         if: "${{ github.event.inputs.image_tag == '' &&  inputs.acr_image_tag != 'rollback'}}"
-#         run: echo "image=v.0.0.${{ inputs.acr_image_tag }}" >> $GITHUB_ENV
-#       - name: setup custom varible
-#         if: "${{ github.event.inputs.image_tag != '' }}"
-#         run: echo "image=v.0.0.${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
-#       - name: setup secret
-#         if: "${{ inputs.acr_image_tag == 'rollback' }}"
-#         run: echo "image=v.0.0.${{ secrets.CURRENT_IMAGE_VERSION }}" >> $GITHUB_ENV
-#       - name: test
-#         run: |
-#           echo ${{ env.image }}
-#       - id: step
-#         run: echo ::set-output name=exit_code::1
+# jobs:
+#   branch-naming-rules:
+#     runs-on: ubuntu-latest
+# #     outputs:
+# #       output: ${{ steps.step.outputs.exit_code }}
+#     steps:
+#       - name: setup Suspend variable
+#         if: github.event.schedule == '0 20 * * 1-5' || github.event.inputs.actions == 'Suspend'
+#         run: echo "action=Suspend" >> $GITHUB_ENV
+#       - name: setup Resume variable
+#         if: github.event.schedule == '30 5 * * 1-5' || github.event.inputs.actions == 'Resume'
+#         run: echo "action=Resume" >> $GITHUB_ENV  
+#       - name: test2
+#         run: echo ${{ env.action }}
+# #       - name: setup varible
+# #         if: "${{ github.event.inputs.image_tag == '' &&  inputs.acr_image_tag != 'rollback'}}"
+# #         run: echo "image=v.0.0.${{ inputs.acr_image_tag }}" >> $GITHUB_ENV
+# #       - name: setup custom varible
+# #         if: "${{ github.event.inputs.image_tag != '' }}"
+# #         run: echo "image=v.0.0.${{ github.event.inputs.image_tag }}" >> $GITHUB_ENV
+# #       - name: setup secret
+# #         if: "${{ inputs.acr_image_tag == 'rollback' }}"
+# #         run: echo "image=v.0.0.${{ secrets.CURRENT_IMAGE_VERSION }}" >> $GITHUB_ENV
+# #       - name: test
+# #         run: |
+# #           echo ${{ env.image }}
+# #       - id: step
+# #         run: echo ::set-output name=exit_code::1
       
