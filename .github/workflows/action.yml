@@ -47,7 +47,7 @@ jobs:
         cat qwerq.txt
         new_json=$(bash print.sh)
         echo $new_json
-        echo "::set-output name=matrix::{\"source_dir\":$new_json}"     
+        echo '::set-output name=matrix::["src/Admin.Name","src/Admin.Name2"]'    
         
     - name: test
       run: echo ${{ steps.set-matrix.outputs.matrix }}
