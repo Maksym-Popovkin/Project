@@ -32,14 +32,14 @@ jobs:
         cat <<EOF > print.sh
         #!/bin/bash
         file_path="qwerq.txt"
-        json="'["
+        json="["
         while read -r URL
         do
           json+=\$URL
-          json+='\",'
+          json+='",'
         done < "\$file_path"
         json=\${json%?}
-        json+="]'"
+        json+="]"
         echo \$json
         EOF
         chmod +x print.sh
@@ -47,7 +47,7 @@ jobs:
         cat qwerq.txt
         new_json=$(bash print.sh)
         echo $new_json
-        echo '::set-output name=matrix::["src/Admin.Name","src/Admin.Name2"]'    
+        echo '::set-output name=matrix::$new_json'    
         
     - name: test
       run: echo ${{ steps.set-matrix.outputs.matrix }}
