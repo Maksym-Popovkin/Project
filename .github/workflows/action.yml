@@ -42,7 +42,7 @@ jobs:
         EOF
         chmod +x print.sh
         echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}' | egrep -o '\\"src/[A-Z][a-z]+.[A-Z][a-z]+' | uniq > qwerq.txt
-        echo qwerq.txt
+        cat qwerq.txt
         bash print.sh
 # name: 'action'
 # #on: pull_request
