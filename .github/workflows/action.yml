@@ -35,7 +35,7 @@ jobs:
         do
           json+=$URL
           json+='\",'
-        done < "$file_path"
+        done < "\$file_path"
         json=${json%?}
         json+="]"
         echo $json
