@@ -56,7 +56,8 @@ jobs:
    needs: check_changed_files
    runs-on: ubuntu-latest
    strategy:
-      matrix: ${{ fromJson(needs.check_changed_files.outputs.the_matrix) }}
+      matrix: 
+          source_dir: ${{ fromJson(needs.check_changed_files.outputs.the_matrix) }}
    steps:
      - name: test
        run: echo ${{ matrix.source_dir }}
