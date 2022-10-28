@@ -28,6 +28,7 @@ jobs:
     - name: List all changed files
       run: |
         cat <<EOF > print.sh
+        #!/bin/bash
         file_path="qwerq.txt"
         json="["
         while read -r URL
@@ -41,6 +42,7 @@ jobs:
         EOF
         chmod +x print.sh
         echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}' | egrep -o '\\"src/[A-Z][a-z]+.[A-Z][a-z]+' | uniq > qwerq.txt
+        echo qwerq.txt
         bash print.sh
 # name: 'action'
 # #on: pull_request
