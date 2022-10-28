@@ -48,7 +48,7 @@ jobs:
         cat qwerq.txt
         new_json=$(bash print.sh)
         echo $new_json
-        run: echo "::set-output name=matrix::{\"source_dir\":$new_json}"     
+        echo "::set-output name=matrix::{\"source_dir\":$new_json}"     
 
  builds_and_tests_sis_sdks:
    needs: check_changed_files
