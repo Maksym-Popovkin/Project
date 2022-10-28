@@ -43,7 +43,7 @@ jobs:
         echo \$json
         EOF
         chmod +x print.sh
-        echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}' | egrep -o '\\"src/[A-Z][a-z]+.[A-Z][a-z]+' | uniq > qwerq.txt
+        echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}' | egrep -o '"src/[A-Z][a-z]+.[A-Z][a-z]+' | uniq > qwerq.txt
         cat qwerq.txt
         new_json=$(bash print.sh)
         echo $new_json
