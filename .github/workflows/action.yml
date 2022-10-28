@@ -33,12 +33,12 @@ jobs:
         json="["
         while read -r URL
         do
-          json+=$URL
+          json+=\$URL
           json+='\",'
         done < "\$file_path"
-        json=${json%?}
+        json=\${json%?}
         json+="]"
-        echo $json
+        echo \$json
         EOF
         chmod +x print.sh
         echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}' | egrep -o '\\"src/[A-Z][a-z]+.[A-Z][a-z]+' | uniq > qwerq.txt
