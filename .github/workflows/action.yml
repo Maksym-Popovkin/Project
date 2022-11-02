@@ -21,7 +21,14 @@ jobs:
       with:
         fetch-depth: 0
     - name: test
-      run: exit 11
+      run: |
+        if [ ! -f "Admin.Name/test" ]; then
+           exit 11
+        fi
+        
+        if [ ! -f "Admin.Name/testtest" ]; then
+           exit 12
+        fi
         
 #     # Get all changed files on last commit   
 #     - name: Get changed files
