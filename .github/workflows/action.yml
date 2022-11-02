@@ -21,13 +21,13 @@ jobs:
     - name: test
       run: |
         ls -la
-        cd Admin.Name
+        cd src/Admin.Name
         ls -la
         if [ ! -f "test" ]; then
            exit 11
         fi
         
-        if [ ! -f "Admin.Name/testtest" ]; then
+        if [ ! -f "testtest" ]; then
            exit 12
         fi
         
