@@ -1,34 +1,38 @@
 name: Builds and Tests SIS SDKs
 
 on:
-  pull_request:
-    types:
-      - opened
-    paths:
-      - 'src/*/**'
+  push: 
+    branches: master
+#   pull_request:
+#     types:
+#       - opened
+#     paths:
+#       - 'src/*/**'
 
 jobs:
  # Generate a matrix with a directories which have changed files
  check_changed_files:
   runs-on: ubuntu-latest
-  outputs:
-    the_matrix: ${{ steps.set-matrix.outputs.matrix }}
+#   outputs:
+#     the_matrix: ${{ steps.set-matrix.outputs.matrix }}
   steps:
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+    - name: test
+      run: exit 11
         
-    # Get all changed files on last commit   
-    - name: Get changed files
-      id: changed-files-dir-names
-      uses: tj-actions/changed-files@v31
-      with:
-#         json: true
-        dir_names: true
+#     # Get all changed files on last commit   
+#     - name: Get changed files
+#       id: changed-files-dir-names
+#       uses: tj-actions/changed-files@v31
+#       with:
+# #         json: true
+#         dir_names: true
     
-    - name: Test
-      run: echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}'
+#     - name: Test
+#       run: echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}'
 #     - id: set-matrix
 #       run: |
 #         cat <<EOF > print.sh
