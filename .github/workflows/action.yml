@@ -12,7 +12,7 @@ on:
 jobs:
  # Generate a matrix with a directories which have changed files
  check_changed_files:
-  if: github.event.pull_request
+  if: github.event_name != 'pull_request'
   runs-on: ubuntu-latest
 #   outputs:
 #     the_matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -23,7 +23,7 @@ jobs:
       run: echo PR
       
  check_changed_files2:
-  if: github.event_name != 'pull_request'
+  if: github.event_name == 'push'
   runs-on: ubuntu-latest
 #   outputs:
 #     the_matrix: ${{ steps.set-matrix.outputs.matrix }}
