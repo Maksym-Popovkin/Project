@@ -3,15 +3,16 @@ name: Builds and Tests SIS SDKs
 on:
   push: 
     branches: master
-#   pull_request:
-#     types:
-#       - opened
+  pull_request:
+    types:
+      - opened
 #     paths:
 #       - 'src/*/**'
 
 jobs:
  # Generate a matrix with a directories which have changed files
  check_changed_files:
+  if: github.event.pull_request
   runs-on: ubuntu-latest
 #   outputs:
 #     the_matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -19,16 +20,28 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: test
-      run: |
-        json="src/Admin.Name"
-        json=$(echo $json | cut -d "." -f2).Service.dll
-        #json+=.Service.dll
-        echo $json
-        cd src/Admin.Name
-        ls -la
-        if [ ! -f "test" ]; then
-           exit 11
-        fi
+      run: echo PR
+      
+ check_changed_files2:
+  if: github.event.push
+  runs-on: ubuntu-latest
+#   outputs:
+#     the_matrix: ${{ steps.set-matrix.outputs.matrix }}
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: test
+      run: echo push
+#       run: |
+#         json="src/Admin.Name"
+#         json=$(echo $json | cut -d "." -f2).Service.dll
+#         #json+=.Service.dll
+#         echo $json
+#         cd src/Admin.Name
+#         ls -la
+#         if [ ! -f "test" ]; then
+#            exit 11
+#         fi
         
         
 #     # Get all changed files on last commit   
