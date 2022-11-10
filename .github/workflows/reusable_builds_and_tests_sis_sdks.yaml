@@ -1,12 +1,13 @@
 name: MATRIX TEST BUILD 
-on: [workflow_call]
+on:
+  pull_request:
+    types:
+      - opened
+    paths:
+      - 'src/*/**'
 jobs:
- init:
-  runs-on: ubuntu-latest
-  steps:
-    - name: test
-      run: |
-        echo Test
+ builds_and_tests_sis_sdks:
+   uses: Maksym-Popovkin/Project/.github/workflows/reusable_builds_and_tests_sis_sdks.yaml@actions
 #     - uses: actions/checkout@v3
 #     - name: Checkout
 #       run: |
