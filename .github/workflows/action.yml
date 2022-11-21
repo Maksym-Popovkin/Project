@@ -1,11 +1,21 @@
 name: Builds and Tests SIS SDKs
 
+
 on:
-  push: 
-    branches: master
-  pull_request:
-    types:
-      - opened
+  workflow_dispatch:
+    inputs: 
+      selecting_app:
+        description: 'Which MS needs to deploy'
+        required: true
+        default: 'Both'
+        type: choice
+        options: [Academic, Admissions, Announcement]
+# on:
+#   push: 
+#     branches: master
+#   pull_request:
+#     types:
+#       - opened
 #     paths:
 #       - 'src/*/**'
 
