@@ -1,16 +1,16 @@
 name: MATRIX TEST BUILD 
-on: [workflow_dispatch]
+on: [workflow_call]
 jobs:
  init:
   runs-on: ubuntu-latest
   steps:
     - uses: actions/checkout@v3
-#     - name: Checkout
-#       run: |
-#         cd src/Admin.Name
-#         ls -la
-#         cd *.Client
-#         ls -la
+    - name: Checkout
+      run: |
+        cd src/Admin.Name
+        ls -la
+        cd *.Client
+        ls -la
         
     - id: set_connection_string
       run: |
