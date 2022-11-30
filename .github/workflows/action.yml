@@ -3,13 +3,13 @@ name: Builds and Tests SIS SDKs
 
 on:
   workflow_dispatch:
-    inputs: 
-      selecting_app:
-        description: 'Which MS needs to deploy'
-        required: true
-        default: 'Both'
-        type: choice
-        options: [Academic, Admissions, Announcement, Attendance, Cafeteria, Calendar, CashRegister, Chat, Document, Email, ExternalApi, FeatureToggle, Feed, GoogleIntegration, Gradebook, Lesson, Logging, Lti, Media, Medical, Notification, People, SISAuthorization, SISSessionStore, Salesforce, Scheduler, SchoolSchedule, StateReporting, Support, Tenancy, TimeClock, TuitionManagementIntegration, Zoom]
+#     inputs: 
+#       selecting_app:
+#         description: 'Which MS needs to deploy'
+#         required: true
+#         default: 'Both'
+#         type: choice
+#         options: [Academic, Admissions, Announcement, Attendance, Cafeteria, Calendar, CashRegister, Chat, Document, Email, ExternalApi, FeatureToggle, Feed, GoogleIntegration, Gradebook, Lesson, Logging, Lti, Media, Medical, Notification, People, SISAuthorization, SISSessionStore, Salesforce, Scheduler, SchoolSchedule, StateReporting, Support, Tenancy, TimeClock, TuitionManagementIntegration, Zoom]
   
 # on:
 #   push: 
@@ -23,7 +23,6 @@ on:
 jobs:
  # Generate a matrix with a directories which have changed files
  check_changed_files:
-  if: github.event_name == 'pull_request'
   runs-on: ubuntu-latest
 #   outputs:
 #     the_matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -32,17 +31,17 @@ jobs:
       uses: actions/checkout@v3
     - name: test
       run: echo PR
-      
- check_changed_files2:
-  if: github.event_name == 'push'
-  runs-on: ubuntu-latest
+    - uses: Maksym-Popovkin/Project/.github/workflows/test.yml@master
+#  check_changed_files2:
+#   if: github.event_name == 'push'
+#   runs-on: ubuntu-latest
 #   outputs:
 #     the_matrix: ${{ steps.set-matrix.outputs.matrix }}
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: test
-      run: echo push
+#   steps:
+#     - name: Checkout
+#       uses: actions/checkout@v3
+#     - name: test
+#       run: echo push
 #       run: |
 #         json="src/Admin.Name"
 #         json=$(echo $json | cut -d "." -f2).Service.dll
