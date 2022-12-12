@@ -12,13 +12,10 @@ on:
 #         options: [Academic, Admissions, Announcement, Attendance, Cafeteria, Calendar, CashRegister, Chat, Document, Email, ExternalApi, FeatureToggle, Feed, GoogleIntegration, Gradebook, Lesson, Logging, Lti, Media, Medical, Notification, People, SISAuthorization, SISSessionStore, Salesforce, Scheduler, SchoolSchedule, StateReporting, Support, Tenancy, TimeClock, TuitionManagementIntegration, Zoom]
   
 # on:
-#   push: 
-#     branches: master
-#   pull_request:
-#     types:
-#       - opened
-#     paths:
-#       - 'src/*/**'
+  push: 
+    branches: master
+    paths:
+      - 'src/Admin.*/**'
 
 jobs:
  # Generate a matrix with a directories which have changed files
