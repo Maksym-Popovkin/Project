@@ -17,8 +17,21 @@ jobs:
   steps:
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 
+        
+    # Get all changed files on last commit   
+    - name: Get changed files
+      id: changed-files-dir-names
+      uses: tj-actions/changed-files@v31
+      with:
+        json: true
+        dir_names: true
+        files: |
+            src/**
+            
     - name: test
-      run: echo PR
+      run: echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}'
 #  check_changed_files2:
 #   if: github.event_name == 'push'
 #   runs-on: ubuntu-latest
