@@ -28,7 +28,7 @@ jobs:
         json: true
         dir_names: true
         files: |
-            src/**
+            src/Admin.*/**
             
     - name: test
       run: echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}'
