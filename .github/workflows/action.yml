@@ -21,17 +21,19 @@ jobs:
         fetch-depth: 0 
         
     # Get all changed files on last commit   
-    - name: Get changed files
-      id: changed-files-dir-names
-      uses: tj-actions/changed-files@v31
-      with:
-        json: true
-        dir_names: true
-        files: |
-            src/Admin.*/**
+#     - name: Get changed files
+#       id: changed-files-dir-names
+#       uses: tj-actions/changed-files@v31
+#       with:
+#         json: true
+#         dir_names: true
+#         files: |
+#             src/Admin.*/**
             
     - name: test
-      run: echo '${{ steps.changed-files-dir-names.outputs.all_changed_files }}'
+      run: |
+        ls -la 
+        ls -la .github
 #  check_changed_files2:
 #   if: github.event_name == 'push'
 #   runs-on: ubuntu-latest
