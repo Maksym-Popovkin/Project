@@ -1,0 +1,7 @@
+name: Call reusable 2
+
+on: [workflow_call]
+
+jobs:
+  call_reuable2:
+    uses: Maksym-Popovkin/Project/.github/workflows/call_third_reusable.yaml@main
