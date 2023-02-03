@@ -1,6 +1,11 @@
 name: Call reusable 2
 
-on: [workflow_call]
+on: 
+ workflow_call:
+    inputs: 
+      name:
+        required: true
+        type: string
 
 jobs:
  pre-build:
@@ -15,3 +20,5 @@ jobs:
     needs: pre-build
     if: needs.pre-build.outputs.the_matrix == 'true'
     uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
+    with:
+      name: ${{ inputs.name }}
