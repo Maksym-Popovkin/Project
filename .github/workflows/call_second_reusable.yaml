@@ -3,5 +3,15 @@ name: Call reusable 2
 on: [workflow_call]
 
 jobs:
-  call_reuable2:
+ pre-build:
+  runs-on: ubuntu-latest
+  outputs:
+    the_matrix: ${{ steps.generate_matrix.outputs.matrix }}
+  steps:
+    - id: generate_matrix  
+      run: |
+        echo "matrix="true" >> $GITHUB_OUTPUT
+ call_reuable2:
+    needs: pre-build
+    if: needs.pre-build.outputs.the_matrix == 'true'
     uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
