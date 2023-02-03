@@ -4,4 +4,4 @@ on: [workflow_call]
 
 jobs:
   call_reuable2:
-    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@main
+    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
