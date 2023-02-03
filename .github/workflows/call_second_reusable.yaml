@@ -10,7 +10,7 @@ jobs:
   steps:
     - id: generate_matrix  
       run: |
-        echo "matrix="true" >> $GITHUB_OUTPUT
+        echo "matrix=true" >> $GITHUB_OUTPUT
  call_reuable2:
     needs: pre-build
     if: needs.pre-build.outputs.the_matrix == 'true'
