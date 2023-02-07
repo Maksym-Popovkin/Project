@@ -20,7 +20,7 @@ jobs:
  call_reuable2:
     needs: pre-build
     #if: needs.pre-build.outputs.the_matrix == 'true' && ${{ inputs.name }} != ''
-    if: fromJson(${{ inputs.name }})[0] != null
+    if: ${{ inputs.name }} != ''
     uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
     with:
       name: ${{ inputs.name }}
