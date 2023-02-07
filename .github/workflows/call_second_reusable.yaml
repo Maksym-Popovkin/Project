@@ -19,8 +19,7 @@ jobs:
         echo "matrix=true" >> $GITHUB_OUTPUT
  call_reuable2:
     needs: pre-build
-    #if: needs.pre-build.outputs.the_matrix == 'true' && ${{ inputs.name }} != ''
-    if: ${{ inputs.name }} != ''
+    if: needs.pre-build.outputs.the_matrix == 'true' && ${{ inputs.name }} != 'false'
     uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
     with:
       name: ${{ inputs.name }}
