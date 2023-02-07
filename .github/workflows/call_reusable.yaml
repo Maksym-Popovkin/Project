@@ -21,7 +21,7 @@ jobs:
       with:
         file: sln.build.yml
         dotnet-version: '"dotnet-version"'
-        service-projects: '"service-projects"[]'
+        service-projects: '"service-projects"'
         unit-test-project: '"unit-test-project"'
   call_reuable1:
     needs: parse_sln-build-config_file
