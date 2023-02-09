@@ -3,7 +3,15 @@ name: Reusable
 on: 
  workflow_call:
     inputs: 
-      name:
+      source:
+        required: true
+        type: string
+        
+      dotnet-version:
+        required: true
+        type: string
+        
+      microservice-name:
         required: true
         type: string
 
@@ -11,7 +19,11 @@ jobs:
  test:
   runs-on: ubuntu-latest
   steps:
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ inputs.dotnet-version }}
     - name: Get changed files
       run: |
         echo "test"
-        echo ${{ inputs.name }}
+        echo ${{ inputs.microservice-name }}
