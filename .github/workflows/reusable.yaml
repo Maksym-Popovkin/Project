@@ -3,9 +3,9 @@ name: Reusable
 on: 
  workflow_call:
     inputs: 
-      source:
-        required: true
-        type: string
+#       source:
+#         required: true
+#         type: string
         
       dotnet-version:
         required: true
