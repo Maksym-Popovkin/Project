@@ -55,4 +55,4 @@ jobs:
    with:
      source: ${{ matrix.source_dir }}
      dotnet-version: ${{ needs.pre-build.outputs.dotnet-version }}
-     name: ${{ needs.pre-build.outputs.microservice-name }}
+     name: ${{ needs.pre-build.outputs.name }}
