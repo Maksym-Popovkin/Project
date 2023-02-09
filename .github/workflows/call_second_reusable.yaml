@@ -13,13 +13,35 @@ jobs:
   outputs:
     the_matrix: ${{ steps.generate_matrix.outputs.matrix }}
   steps:
-    - id: generate_matrix  
-      run: |
-        echo ${{ inputs.name }}
-        echo "matrix=true" >> $GITHUB_OUTPUT
+    - name: Clone BE repository
+      uses: actions/checkout@v3
+    
+    - name: Read Configuration
+      id: configuration
+      uses: CumulusDS/get-yaml-paths-action@v1.0.1
+      with:
+        file: sln.build.yml
+        name: '"name"'
+        services: '"services"[]'
+        processors: '"processors"[]'
+        functions: '"functions"[]'
+        integration-tests: '"integration-tests"[]'
+        unit-tests: '"unit-tests"[]'
+        angular: '"angular"'
+        npm-version: '"npm-version"'
+        dotnet-version: '"dotnet-version"'
+        nuget-version: '"nuget-version"'
+        angular-apps: '"angular-apps"[]'
+        helm-charts: '"helm-charts"[]'
+        nuget-packages: '"nuget-packages"[]'
  call_reuable2:
-    needs: pre-build
-    if: needs.pre-build.outputs.the_matrix == 'true' && ${{ inputs.name }} != ''
-    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
-    with:
-      name: ${{ inputs.name }}
+   needs: pre-build
+   strategy:
+      fail-fast: false
+      matrix: 
+        source_dir: ${{ fromJson(needs.pre-build.outputs.helm-charts) }}
+   uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
+   with:
+     source: ${{ matrix.source_dir }}
+     dotnet-version: ${{ needs.pre-build.outputs.dotnet-version }}
+     microservice-name: ${{ needs.pre-build.outputs.microservice-name }}
