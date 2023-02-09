@@ -36,12 +36,12 @@ jobs:
         nuget-packages: '"nuget-packages"[]'
  call_reuable2:
    needs: pre-build
-   strategy:
-      fail-fast: false
-      matrix: 
-        source_dir: ${{ fromJson(needs.pre-build.outputs.helm-charts) }}
+#    strategy:
+#       fail-fast: false
+#       matrix: 
+#         source_dir: ${{ fromJson(needs.pre-build.outputs.helm-charts) }}
    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
    with:
-     source: ${{ matrix.source_dir }}
+#      source: ${{ matrix.source_dir }}
      dotnet-version: ${{ needs.pre-build.outputs.dotnet-version }}
      microservice-name: ${{ needs.pre-build.outputs.microservice-name }}
