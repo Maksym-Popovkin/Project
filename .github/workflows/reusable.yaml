@@ -11,7 +11,7 @@ on:
         required: true
         type: string
         
-      microservice-name:
+      name:
         required: true
         type: string
 
@@ -26,4 +26,4 @@ jobs:
     - name: Get changed files
       run: |
         echo "test"
-        echo ${{ inputs.microservice-name }}
+        echo ${{ inputs.name }}
