@@ -11,7 +11,18 @@ jobs:
  pre-build:
   runs-on: ubuntu-latest
   outputs:
-    the_matrix: ${{ steps.generate_matrix.outputs.matrix }}
+      name: ${{ steps.configuration.outputs.name }}
+      services: ${{ steps.configuration.outputs.services }}
+      angular-apps: ${{ steps.configuration.outputs.angular-apps }}
+      processors: ${{ steps.configuration.outputs.processors }}
+      functions: ${{ steps.configuration.outputs.functions }}
+      integration-tests: ${{ steps.configuration.outputs.integration-tests }}
+      unit-tests: ${{ steps.configuration.outputs.unit-tests }}
+      helm-charts: ${{ steps.configuration.outputs.helm-charts }}
+      npm-version: ${{ steps.configuration.outputs.npm-version }}
+      dotnet-version: ${{ steps.configuration.outputs.dotnet-version }}
+      nuget-version: ${{ steps.configuration.outputs.nuget-version }}
+    
   steps:
     - name: Clone BE repository
       uses: actions/checkout@v3
@@ -36,12 +47,12 @@ jobs:
         nuget-packages: '"nuget-packages"[]'
  call_reuable2:
    needs: pre-build
-#    strategy:
-#       fail-fast: false
-#       matrix: 
-#         source_dir: ${{ fromJson(needs.pre-build.outputs.helm-charts) }}
+   strategy:
+      fail-fast: false
+      matrix: 
+        source_dir: ${{ fromJson(needs.pre-build.outputs.helm-charts) }}
    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
    with:
-#      source: ${{ matrix.source_dir }}
+     source: ${{ matrix.source_dir }}
      dotnet-version: ${{ needs.pre-build.outputs.dotnet-version }}
-     microservice-name: ${{ needs.pre-build.outputs.microservice-name }}
+     name: ${{ needs.pre-build.outputs.microservice-name }}
