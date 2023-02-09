@@ -1,4 +1,22 @@
-dotnet-version: 3.1.x
-node-version: 16.15.1
-service-projects:
-unit-test-project: FeatureSourceGenerators.Test/FeatureSourceGenerators.Test.csproj
+name: document-service
+services:
+  - Document.Service/Document.Service.csproj
+processors:
+  - Document.Processor/Document.Processor.csproj
+functions:
+  - Document.FunctionProcessor/Document.FunctionProcessor.csproj
+integration-tests:
+  - Document.IntegrationTests/Document.IntegrationTests.csproj
+unit-tests:
+  - Document.Tests/Document.Tests.csproj
+angular: false
+install-npm: false
+npm-version:
+dotnet-version: 6.0
+nuget-version: 3
+angular-apps:
+helm-charts:
+ - charts/document-processor
+ - charts/document-service
+nuget-packages:
+ - Document.Service.Client/Document.Service.Client.csproj
