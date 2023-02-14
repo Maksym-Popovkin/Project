@@ -1,6 +1,6 @@
 name: document-service
 services:
-  - Document.Service/Document.Service.csproj
+  - sfgsgg/dgdgeg/Document.Service/Document.Service.csproj
 processors:
   - Document.Processor/Document.Processor.csproj
 functions:
