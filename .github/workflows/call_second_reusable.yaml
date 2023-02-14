@@ -54,5 +54,5 @@ jobs:
    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
    with:
      source: ${{ matrix.source_dir }}
-     dotnet-version: ${{ needs.pre-build.outputs.dotnet-version }}
+     dotnet-version: ${{ needs.pre-build.outputs.services }}
      name: ${{ needs.pre-build.outputs.name }}
