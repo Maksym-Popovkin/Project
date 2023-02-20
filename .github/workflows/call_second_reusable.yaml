@@ -22,7 +22,7 @@ jobs:
       uses: CumulusDS/get-yaml-paths-action@v1.0.1
       with:
         file: sln.build.yml
-        service-projects: '"services"'
+        service-projects: '"services"[]'
         
     - name: test
       run: echo ${{ steps.configuration.outputs.service-projects }}
