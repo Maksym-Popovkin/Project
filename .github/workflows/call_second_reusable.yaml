@@ -33,7 +33,7 @@ jobs:
       with:
         file: sln.build.yml
         name: '"name"'
-        service-projects: '"service-projects"[]'
+        service-projects: '"service-projects"'
         processors: '"processors"[]'
         functions: '"functions"[]'
         integration-tests: '"integration-tests"[]'
