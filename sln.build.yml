@@ -12,7 +12,7 @@ services:
    unit-tests:      
      - FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj
 processors: 
-- name: feature-toggle-processor
+ - name: feature-toggle-processor
    project: FeatureToggle.Processor/FeatureToggle.Processor.csproj
    helm-chart: charts/feature-toggle-processor
    unit-tests:      
