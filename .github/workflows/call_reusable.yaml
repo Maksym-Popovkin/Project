@@ -5,9 +5,9 @@ on: [workflow_dispatch]
 jobs:
   parse_sln-build-config_file:
     runs-on: ubuntu-latest
-    outputs:
-      dotnet-version: ${{ steps.configuration.outputs.dotnet-version }}
-      service-projects: ${{ steps.configuration.outputs.service-projects }}
+#     outputs:
+#       dotnet-version: ${{ steps.configuration.outputs.dotnet-version }}
+#       service-projects: ${{ steps.configuration.outputs.service-projects }}
     steps:
     # Clone code from BE repository
     - name: Clone BE repository
@@ -23,8 +23,11 @@ jobs:
         dotnet-version: '"dotnet-version"'
         service-projects: '"service-projects"'
         unit-test-project: '"unit-test-project"'
-  call_reuable1:
-    needs: parse_sln-build-config_file
-    uses: Maksym-Popovkin/Project/.github/workflows/call_second_reusable.yaml@master
-    with:
-      name: ${{ needs.parse_sln-build-config_file.outputs.service-projects }}
+        
+    - name: test
+      run: echo ${{ steps.configuration.outputs.service-projects }}
+#   call_reuable1:
+#     needs: parse_sln-build-config_file
+#     uses: Maksym-Popovkin/Project/.github/workflows/call_second_reusable.yaml@master
+#     with:
+#       name: ${{ needs.parse_sln-build-config_file.outputs.service-projects }}
