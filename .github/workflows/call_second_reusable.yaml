@@ -26,7 +26,7 @@ jobs:
                
     - name: test
       id: configuration
-      run: echo "service-projects=["{"name":"feature-toggle-cache-service","project":"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj","helm-chart":"charts/feature-toggle-cache-service","unit-tests":["FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj"]}","{"name":"feature-toggle-service","project":"FeatureToggle.Service/FeatureToggle.Service.csproj","helm-chart":"charts/feature-toggle-service","unit-tests":["FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj"]}"]" >> $GITHUB_OUTPUT
+      run: echo "service-projects=["test1","test2"]" >> $GITHUB_OUTPUT
  call_reuable2:
    needs: pre-build
    strategy:
