@@ -12,7 +12,7 @@ jobs:
   runs-on: ubuntu-latest
   outputs:
       name: ${{ steps.configuration.outputs.name }}
-      services: ${{ steps.configuration.outputs.services }}
+      service-projects: ${{ steps.configuration.outputs.services }}
       angular-apps: ${{ steps.configuration.outputs.angular-apps }}
       processors: ${{ steps.configuration.outputs.processors }}
       functions: ${{ steps.configuration.outputs.functions }}
@@ -45,6 +45,9 @@ jobs:
         angular-apps: '"angular-apps"[]'
         helm-charts: '"helm-charts"[]'
         nuget-packages: '"nuget-packages"[]'
+        
+    - name: test
+      run: echo ${{ steps.configuration.outputs.service-projects }}
  call_reuable2:
    needs: pre-build
    strategy:
