@@ -30,7 +30,8 @@ jobs:
    needs: pre-build
    strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.pre-build.outputs.service-projects) }}
+      matrix: 
+        source: ${{ fromJson(needs.pre-build.outputs.service-projects) }}
    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
    with:
-     source: ${{ matrix.services }}
+     source: ${{ matrix.source }}
