@@ -17,15 +17,16 @@ jobs:
     - name: Clone BE repository
       uses: actions/checkout@v3
     
-    - name: Read Configuration
-      id: configuration
-      uses: CumulusDS/get-yaml-paths-action@v1.0.1
-      with:
-        file: sln.build.yml
-        service-projects: '"services"[]'
-        
+#     - name: Read Configuration
+#       id: configuration
+#       uses: CumulusDS/get-yaml-paths-action@v1.0.1
+#       with:
+#         file: sln.build.yml
+#         service-projects: '"services"[]'
+               
     - name: test
-      run: echo ${{ steps.configuration.outputs.service-projects }}
+      id: configuration
+      run: echo "service-projects=[{"name":"feature-toggle-cache-service","project":"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj","helm-chart":"charts/feature-toggle-cache-service","unit-tests":["FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj"]},{"name":"feature-toggle-service","project":"FeatureToggle.Service/FeatureToggle.Service.csproj","helm-chart":"charts/feature-toggle-service","unit-tests":["FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj"]}]" >> $GITHUB_OUTPUT
  call_reuable2:
    needs: pre-build
    strategy:
