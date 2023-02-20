@@ -33,7 +33,7 @@ jobs:
       with:
         file: sln.build.yml
         name: '"name"'
-        services: '"services"[]'
+        service-projects: '"service-projects"[]'
         processors: '"processors"[]'
         functions: '"functions"[]'
         integration-tests: '"integration-tests"[]'
@@ -50,7 +50,7 @@ jobs:
    strategy:
       fail-fast: false
       matrix: 
-        source_dir: ${{ fromJson(needs.pre-build.outputs.helm-charts) }}
+        source_dir: ${{ fromJson(needs.pre-build.outputs.service-projects) }}
    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
    with:
      source: ${{ matrix.source_dir }}
