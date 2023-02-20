@@ -21,7 +21,7 @@ jobs:
       with:
         file: sln.build.yml
         dotnet-version: '"dotnet-version"'
-        service-projects: '"services"'
+        service-projects: '"services"[]'
         unit-test-project: '"unit-test-project"'
         
     - name: test
