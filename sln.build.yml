@@ -1,27 +1,25 @@
-name: document-service
-service-projects:
-  document:
-    - path: Document.Service/Document.Service.csproj
-    - charts: Document.Processor/Document.Processor.csproj
-  processor:
-    - path: Document.dfgdhgDocument.Service.csproj
-    - charts: Document.shgg/Document.Processor.csproj
-processors:
-  - Document.Processor/Document.Processor.csproj
-functions:
-  - Document.FunctionProcessor/Document.FunctionProcessor.csproj
-integration-tests:
-  - Document.IntegrationTests/Document.IntegrationTests.csproj
-unit-tests:
-  - Document.Tests/Document.Tests.csproj
-angular: false
-install-npm: false
-npm-version:
-dotnet-version: 6.0
-nuget-version: 3
-angular-apps:
-helm-charts:
- - charts/document-processor
- - charts/document-service
-nuget-packages:
- - Document.Service.Client/Document.Service.Client.csproj
+dotnet-version: 6.0.x
+nuget-version: 5.x
+services: 
+ - name: feature-toggle-cache-service
+   project: FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj
+   helm-chart: charts/feature-toggle-cache-service
+   unit-tests:      
+     - FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj
+ - name: feature-toggle-service
+   project: FeatureToggle.Service/FeatureToggle.Service.csproj
+   helm-chart: charts/feature-toggle-service
+   unit-tests:      
+     - FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj
+processors: 
+- name: feature-toggle-processor
+   project: FeatureToggle.Processor/FeatureToggle.Processor.csproj
+   helm-chart: charts/feature-toggle-processor
+   unit-tests:      
+     - FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj
+azure-functions: 
+ - name: feature-toggle-azure-functions
+   project: FeatureToggle.AzureFunctions/FeatureToggle.AzureFunctions.csproj
+   helm-chart: charts/feature-toggle-azure-functions
+   unit-tests:      
+     - FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj
