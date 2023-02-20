@@ -1,6 +1,9 @@
 name: document-service
 services:
-  - sfgsgg/dgdgeg/Document.Service/Document.Service.csproj
+  - Document.Service/Document.Service.csproj
+  chart: new chart
+  - Document.Processor/Document.Processor.csproj
+  chart: second chart
 processors:
   - Document.Processor/Document.Processor.csproj
 functions:
