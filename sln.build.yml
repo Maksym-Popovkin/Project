@@ -1,5 +1,5 @@
 name: document-service
-services:
+service-projects:
   document:
     - path: Document.Service/Document.Service.csproj
     - charts: Document.Processor/Document.Processor.csproj
