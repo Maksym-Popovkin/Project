@@ -1,9 +1,9 @@
 name: document-service
 services:
   - Document.Service/Document.Service.csproj
-  chart: new chart
+    chart: new chart
   - Document.Processor/Document.Processor.csproj
-  chart: second chart
+    chart: second chart
 processors:
   - Document.Processor/Document.Processor.csproj
 functions:
