@@ -26,7 +26,7 @@ jobs:
                
     - name: test
       id: configuration
-      run: echo "service-projects=["test1","test2"]" >> $GITHUB_OUTPUT
+      run: echo "service-projects=[test1,test2]" >> $GITHUB_OUTPUT
  call_reuable2:
    needs: pre-build
    strategy:
