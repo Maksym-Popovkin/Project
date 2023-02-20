@@ -21,6 +21,4 @@ jobs:
   steps:
     - name: Get changed files
       run: |
-        echo "test"
-        res=$(dirname ${{ inputs.dotnet-version }})
-        echo $res
+        echo ${{ inputs.source }}
