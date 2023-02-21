@@ -28,8 +28,8 @@ jobs:
       id: configuration
       run: |
         #service=$(echo [\"src/Services.TimeClock\",\"src/Services.TimeClock\",\"src/Service.Chat\",\"src/Service.Chat\"])
-        #service=$(echo {\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]})
-        service=$(echo [\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\",\"helm-chart\":\"charts/feature-toggle-cache-service\",\"unit-tests\":[\"FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj\"]])
+        service=$(echo {\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]})
+        #service=$(echo [\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\",\"helm-chart\":\"charts/feature-toggle-cache-service\",\"unit-tests\":[\"FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj\"]])
         echo $service
         echo "service-projects=$service" >> $GITHUB_OUTPUT
       
