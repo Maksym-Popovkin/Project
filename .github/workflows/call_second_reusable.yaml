@@ -35,7 +35,7 @@ jobs:
         #echo "service-projects={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
         service=$(echo ${{ steps.configuration1.outputs.service-projects }} | sed 's|"|\"|')
         echo "service-projects={\"include\":[{\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\",\"helm-chart\":\"FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj::FeatureToggle.UnitTests/FeatureTog\"}]}" >> $GITHUB_OUTPUT
-        echo "service-projects1={\"include\":$service}"
+        echo "service-projects1={\"include\":$service}" >> $GITHUB_OUTPUT
       
     - name: test2
       run: |
@@ -47,7 +47,7 @@ jobs:
    needs: pre-build
    strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.pre-build.outputs.service-projects) }}
+      matrix: ${{ fromJson(needs.pre-build.outputs.service-projects1) }}
    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
    with:
      source: ${{ matrix.name }}
