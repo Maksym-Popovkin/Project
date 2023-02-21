@@ -27,6 +27,9 @@ jobs:
     - name: test
       id: configuration
       run: echo "service-projects=["src/Services.TimeClock","src/Services.TimeClock","src/Service.Chat","src/Service.Chat"]" >> $GITHUB_OUTPUT
+      
+    - name: test2
+      run: echo ${{ steps.configuration.outputs.service-projects }}
  call_reuable2:
    needs: pre-build
    strategy:
