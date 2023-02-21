@@ -32,7 +32,7 @@ jobs:
         #service=$(echo [\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\",\"helm-chart\":\"charts/feature-toggle-cache-service\",\"unit-tests\":[\"FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj\"]])
         echo $service
         #echo "service-projects={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
-        echo "service-projects={\"include\":[{\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
+        echo "service-projects={\"include\":[{\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\",\"helm-chart\":\"charts/feature-toggle-cache-service\"}]}" >> $GITHUB_OUTPUT
       
     - name: test2
       run: echo ${{ steps.configuration.outputs.service-projects }}
@@ -43,6 +43,7 @@ jobs:
       matrix: ${{ fromJson(needs.pre-build.outputs.service-projects) }}
    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
    with:
-     source: ${{ matrix.project }}
-     source1: ${{ matrix.config }}
+     source: ${{ matrix.name }}
+     source1: ${{ matrix.project }}
+     source2: ${{ matrix.helm-chart }}
      
