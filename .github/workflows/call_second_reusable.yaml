@@ -11,7 +11,7 @@ jobs:
  pre-build:
   runs-on: ubuntu-latest
   outputs:
-      service-projects: ${{ steps.configuration.outputs.service-projects }}
+      service-projects: ${{ steps.configuration1.outputs.service-projects }}
       dotnet-version: ${{ steps.configuration1.outputs.dotnet-version }}
     
   steps:
@@ -37,11 +37,12 @@ jobs:
    needs: pre-build
    strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.pre-build.outputs.service-projects) }}
+      matrix: 
+        service: ${{ fromJSON(needs.pre-build.outputs.service-projects) }}
    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
    with:
-     source: ${{ matrix.name }}
-     source1: ${{ matrix.project }}
-     source2: ${{ matrix.unit-tests }}
+     source: ${{ matrix.service.name }}
+     source1: ${{ matrix.service.project }}
+     source2: ${{ matrix.service.unit-tests }}
      dotnet-version: ${{ needs.pre-build.outputs.dotnet-version }}
      
