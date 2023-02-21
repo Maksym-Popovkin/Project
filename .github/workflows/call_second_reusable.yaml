@@ -43,6 +43,6 @@ jobs:
    with:
      source: ${{ matrix.service.name }}
      source1: ${{ matrix.service.project }}
-     source2: ${{ matrix.service.unit-tests }}
+     source2: ${{ matrix.service.unit-tests[0] }}
      dotnet-version: ${{ needs.pre-build.outputs.dotnet-version }}
      
