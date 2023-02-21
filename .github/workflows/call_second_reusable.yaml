@@ -53,5 +53,5 @@ jobs:
    with:
      source: ${{ matrix.name }}
      source1: ${{ matrix.project }}
-     source2: ${{ matrix.helm-chart }}
+     source2: ${{ matrix.unit-tests }}
      
