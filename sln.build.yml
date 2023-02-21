@@ -4,11 +4,15 @@ services:
  - name: feature-toggle-cache-service
    project: FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj
    helm-chart: charts/feature-toggle-cache-service
-   unit-tests: FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj::FeatureToggle.UnitTests
+   unit-tests: 
+    - FeatureSourceGenerators.Test/FeatureSourceGenerators.Test.csproj
+    - FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj
  - name: feature-toggle-service
    project: FeatureToggle.Service/FeatureToggle.Service.csproj
    helm-chart: charts/feature-toggle-service
-   unit-tests: FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj::FeatureToggle.UnitTest
+   unit-tests:
+    - FeatureSourceGenerators.Test/FeatureSourceGenerators.Test.csproj
+    - FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj
 processors: 
  - name: feature-toggle-processor
    project: FeatureToggle.Processor/FeatureToggle.Processor.csproj
