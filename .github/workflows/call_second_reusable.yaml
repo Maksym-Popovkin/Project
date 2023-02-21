@@ -27,9 +27,9 @@ jobs:
     - name: test
       id: configuration
       run: |
-        service-projects=$(echo ["src/Services.TimeClock","src/Services.TimeClock","src/Service.Chat","src/Service.Chat"])
+        service=$(echo ["src/Services.TimeClock","src/Services.TimeClock","src/Service.Chat","src/Service.Chat"])
         echo $service-projects
-        echo "service-projects=$service-projects" >> $GITHUB_OUTPUT
+        echo "service-projects=$service" >> $GITHUB_OUTPUT
       
     - name: test2
       run: echo ${{ steps.configuration.outputs.service-projects }}
