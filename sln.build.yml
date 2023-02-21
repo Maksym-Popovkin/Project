@@ -13,11 +13,9 @@ processors:
  - name: feature-toggle-processor
    project: FeatureToggle.Processor/FeatureToggle.Processor.csproj
    helm-chart: charts/feature-toggle-processor
-   unit-tests:      
-     - FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj
+   unit-tests: FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj
 azure-functions: 
  - name: feature-toggle-azure-functions
    project: FeatureToggle.AzureFunctions/FeatureToggle.AzureFunctions.csproj
    helm-chart: charts/feature-toggle-azure-functions
-   unit-tests:      
-     - FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj
+   unit-tests: FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj
