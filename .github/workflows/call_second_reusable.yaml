@@ -27,7 +27,7 @@ jobs:
     - name: test
       id: configuration
       run: |
-        service={\"include\":$(echo '${{ steps.configuration1.outputs.service-projects }}'}
+        service={\"include\":$(echo '${{ steps.configuration1.outputs.service-projects }}')}
         echo $service
         echo "service-projects=$service" >> $GITHUB_OUTPUT
       
