@@ -11,8 +11,7 @@ jobs:
  pre-build:
   runs-on: ubuntu-latest
   outputs:
-      #service-projects: ${{ steps.configuration.outputs.service-projects }}
-      service-projects1: ${{ steps.configuration.outputs.service-projects1 }}
+      service-projects: ${{ steps.configuration.outputs.service-projects }}
     
   steps:
     - name: Clone BE repository
@@ -28,27 +27,20 @@ jobs:
     - name: test
       id: configuration
       run: |
-        #service=$(echo [\"src/Services.TimeClock\",\"src/Services.TimeClock\",\"src/Service.Chat\",\"src/Service.Chat\"])
-        #service=$(echo {\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]})
-        #service=$(echo [\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\",\"helm-chart\":\"charts/feature-toggle-cache-service\",\"unit-tests\":[\"FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj\"]])
-        #echo $service
-        #echo "service-projects={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
         service={\"include\":$(echo '${{ steps.configuration1.outputs.service-projects }}' | sed 's|"|\"|')}
         echo $service
-        #echo "service-projects={\"include\":[{\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\",\"helm-chart\":\"FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj::FeatureToggle.UnitTests/FeatureTog\"}]}" >> $GITHUB_OUTPUT
-        echo "service-projects1=$service" >> $GITHUB_OUTPUT
+        echo "service-projects=$service" >> $GITHUB_OUTPUT
       
     - name: test2
       run: |
         echo ${{ steps.configuration.outputs.service-projects }}
-        echo ${{ steps.configuration.outputs.service-projects1 }}
       
       
  call_reuable2:
    needs: pre-build
    strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.pre-build.outputs.service-projects1) }}
+      matrix: ${{ fromJson(needs.pre-build.outputs.service-projects) }}
    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
    with:
      source: ${{ matrix.name }}
