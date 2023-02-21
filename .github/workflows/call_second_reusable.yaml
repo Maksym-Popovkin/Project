@@ -12,7 +12,7 @@ jobs:
   runs-on: ubuntu-latest
   outputs:
       service-projects: ${{ steps.configuration.outputs.service-projects }}
-      dotnet-version: ${{ steps.configuration.outputs.dotnet-version }}
+      dotnet-version: ${{ steps.configuration1.outputs.dotnet-version }}
     
   steps:
     - name: Clone BE repository
@@ -36,7 +36,7 @@ jobs:
     - name: test2
       run: |
         echo ${{ steps.configuration.outputs.service-projects }}
-        echo ${{ steps.configuration.outputs.dotnet-version }}
+        echo ${{ steps.configuration1.outputs.dotnet-version }}
       
       
  call_reuable2:
