@@ -12,6 +12,7 @@ jobs:
   runs-on: ubuntu-latest
   outputs:
       service-projects: ${{ steps.configuration.outputs.service-projects }}
+      service-projects1: ${{ steps.configuration.outputs.service-projects1 }}
     
   steps:
     - name: Clone BE repository
@@ -33,11 +34,12 @@ jobs:
         #echo $service
         #echo "service-projects={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
         echo "service-projects={\"include\":[{\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\",\"helm-chart\":\"FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj::FeatureToggle.UnitTests/FeatureTog\"}]}" >> $GITHUB_OUTPUT
+        echo "service-projects1={"include":${{ steps.configuration1.outputs.service-projects }}}
       
     - name: test2
       run: |
         echo ${{ steps.configuration.outputs.service-projects }}
-        echo ${{ steps.configuration1.outputs.service-projects }}
+        echo ${{ steps.configuration.outputs.service-projects1 }}
       
       
  call_reuable2:
