@@ -12,7 +12,9 @@ on:
       source2:
         required: true
         type: string
-
+      dotnet-version:
+        required: true
+        type: string
 jobs:
  test:
   runs-on: ubuntu-latest
@@ -22,3 +24,4 @@ jobs:
         echo ${{ inputs.source }}
         echo ${{ inputs.source1 }}
         echo ${{ inputs.source2 }}
+        echo ${{ inputs.dotnet-version }}
