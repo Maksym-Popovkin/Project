@@ -30,9 +30,9 @@ jobs:
         #service=$(echo [\"src/Services.TimeClock\",\"src/Services.TimeClock\",\"src/Service.Chat\",\"src/Service.Chat\"])
         #service=$(echo {\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]})
         #service=$(echo [\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\",\"helm-chart\":\"charts/feature-toggle-cache-service\",\"unit-tests\":[\"FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj\"]])
-        echo $service
+        #echo $service
         #echo "service-projects={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
-        echo "service-projects={\"include\":[{\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\",\"helm-chart\":[\"FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj\",\"FeatureToggle.UnitTests/FeatureTog\"]}]}" >> $GITHUB_OUTPUT
+        echo "service-projects={\"include\":[{\"name\":\"feature-toggle-cache-service\",\"project\":\"FeatureToggle.Cache.Service/FeatureToggle.Cache.Service.csproj\",\"helm-chart\":\"FeatureToggle.UnitTests/FeatureToggle.UnitTests.csproj;#;FeatureToggle.UnitTests/FeatureTog\"]}]}" >> $GITHUB_OUTPUT
       
     - name: test2
       run: echo ${{ steps.configuration.outputs.service-projects }}
