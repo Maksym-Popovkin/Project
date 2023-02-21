@@ -27,8 +27,8 @@ jobs:
     - name: test
       id: configuration
       run: |
-        service=$(echo ["src/Services.TimeClock","src/Services.TimeClock","src/Service.Chat","src/Service.Chat"])
-        echo $service-projects
+        service=$(echo [\"src/Services.TimeClock\",\"src/Services.TimeClock\",\"src/Service.Chat\",\"src/Service.Chat\"])
+        echo $service
         echo "service-projects=$service" >> $GITHUB_OUTPUT
       
     - name: test2
