@@ -12,6 +12,7 @@ jobs:
   runs-on: ubuntu-latest
   outputs:
       service-projects: ${{ steps.configuration.outputs.service-projects }}
+      dotnet-version: ${{ steps.configuration.outputs.dotnet-version }}
     
   steps:
     - name: Clone BE repository
@@ -22,6 +23,7 @@ jobs:
       uses: CumulusDS/get-yaml-paths-action@v1.0.1
       with:
         file: sln.build.yml
+        dotnet-version: '"dotnet-version"'
         service-projects: '"services"[]'
                
     - name: test
@@ -34,6 +36,7 @@ jobs:
     - name: test2
       run: |
         echo ${{ steps.configuration.outputs.service-projects }}
+        echo ${{ steps.configuration.outputs.dotnet-version }}
       
       
  call_reuable2:
@@ -46,4 +49,5 @@ jobs:
      source: ${{ matrix.name }}
      source1: ${{ matrix.project }}
      source2: ${{ matrix.unit-tests }}
+     dotnet-version: ${{ needs.pre-build.outputs.dotnet-version }}
      
