@@ -27,7 +27,7 @@ jobs:
 #     - name: test
 #       run: echo ${{ steps.configuration.outputs.service-projects }}
   call_reuable1:
-#     needs: parse_sln-build-config_file
+    needs: parse_sln-build-config_file
     uses: Maksym-Popovkin/Project/.github/workflows/call_second_reusable.yaml@master
 #     with:
 #       name: ${{ needs.parse_sln-build-config_file.outputs.service-projects }}
