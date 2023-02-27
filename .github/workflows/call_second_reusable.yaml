@@ -25,6 +25,7 @@ jobs:
             artifact2.txt
             
   call_reuable2:
+   needs: prepare_artifacts
    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
 #  pre-build:
 #   runs-on: ubuntu-latest
