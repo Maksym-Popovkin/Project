@@ -28,6 +28,9 @@ jobs:
     - name: Display structure of downloaded files
       run: |
         ls -la
+        cat artifact1.txt
+        echo "-----------"
+        cat artifact1.txt
         
 #     - name: Get changed files
 #       run: |
