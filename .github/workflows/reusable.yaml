@@ -2,26 +2,36 @@ name: Reusable
 
 on: 
  workflow_call:
-    inputs: 
-      source:
-        required: true
-        type: string
-      source1:
-        required: true
-        type: string
-      source2:
-        required: true
-        type: string
-      dotnet-version:
-        required: true
-        type: string
+#     inputs: 
+#       source:
+#         required: true
+#         type: string
+#       source1:
+#         required: true
+#         type: string
+#       source2:
+#         required: true
+#         type: string
+#       dotnet-version:
+#         required: true
+#         type: string
 jobs:
  test:
   runs-on: ubuntu-latest
   steps:
-    - name: Get changed files
+    - uses: actions/checkout@v3
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: my-artifact
+    
+    - name: Display structure of downloaded files
       run: |
-        echo ${{ inputs.source }}
-        echo ${{ inputs.source1 }}
-        echo ${{ inputs.source2 }}
-        echo ${{ inputs.dotnet-version }}
+        ls -la
+        
+#     - name: Get changed files
+#       run: |
+#         echo ${{ inputs.source }}
+#         echo ${{ inputs.source1 }}
+#         echo ${{ inputs.source2 }}
+#         echo ${{ inputs.dotnet-version }}
