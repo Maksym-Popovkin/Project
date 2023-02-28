@@ -14,8 +14,9 @@ jobs:
     - name: Display structure of downloaded files
       run: |
         ls -la
+        echo "test.txt file contents:"
         cat test.txt
-        echo "-----------"
+        echo "test2.txt file contents:"
         cat test2.txt
             
   call_reuable2:
