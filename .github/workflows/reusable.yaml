@@ -14,8 +14,7 @@ jobs:
     - name: Display structure of downloaded files
       run: |
         ls -la
-        cd test 
-        cat test.txt
-        echo "-----------"
-        cd test2
-        cat test.txt
+        echo "test/test.txt file contents:"
+        cat test/test.txt
+        echo "test/test2/test.txt file contents:"
+        cat test/test2/test.txt
