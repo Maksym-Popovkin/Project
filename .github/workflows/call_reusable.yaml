@@ -20,8 +20,11 @@ jobs:
       run: |
         echo "image1" > test.txt
         echo "image2" >> test.txt
-        echo "image3" > test2.txt
-        echo "image4" >> test2.txt
+        mkdir test
+        mkdir test/test2
+        echo "image3" > test/test.txt
+        echo "image4" > test/test2/test.txt
+        
     
     - uses: actions/upload-artifact@v3
       with:
@@ -29,6 +32,12 @@ jobs:
         path: |
           test.txt
           test2.txt
+          
+    - uses: actions/upload-artifact@v3
+      with:
+        name: my-artifact2
+        path: |
+          test/
           
   call_reuable:
     needs: parse_sln-build-config_file
