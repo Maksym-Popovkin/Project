@@ -1,33 +1,35 @@
 name: Call reusable 1
 
-on: [workflow_dispatch]
+on:
+  push:
+    branches:
+      - Check
 
 jobs:
   parse_sln-build-config_file:
     runs-on: ubuntu-latest
-#     outputs:
-#       dotnet-version: ${{ steps.configuration.outputs.dotnet-version }}
-#       service-projects: ${{ steps.configuration.outputs.service-projects }}
+    
     steps:
-    # Clone code from BE repository
-    - name: Clone BE repository
+    - name: Repository
       uses: actions/checkout@v3
       with:
         path: .
-    
-#     - name: Read Configuration
-#       id: configuration
-#       uses: CumulusDS/get-yaml-paths-action@v1.0.1
-#       with:
-#         file: sln.build.yml
-#         dotnet-version: '"dotnet-version"'
-#         service-projects: '"services"[]'
-#         unit-test-project: '"unit-test-project"'
+        ref: Check
         
-#     - name: test
-#       run: echo ${{ steps.configuration.outputs.service-projects }}
-  call_reuable1:
+    - name: Prepare artifact
+      run: |
+        echo "image1" > test.txt
+        echo "image2" >> test.txt
+        echo "image3" > test2.txt
+        echo "image4" >> testt2.txt
+    
+    - uses: actions/upload-artifact@v3
+      with:
+        name: my-artifact
+        path: |
+          test.txt
+          test2.txt
+          
+  call_reuable:
     needs: parse_sln-build-config_file
-    uses: Maksym-Popovkin/Project/.github/workflows/call_second_reusable.yaml@master
-#     with:
-#       name: ${{ needs.parse_sln-build-config_file.outputs.service-projects }}
+    uses: Maksym-Popovkin/Project/.github/workflows/call_second_reusable.yaml@Check
