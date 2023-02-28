@@ -19,7 +19,7 @@ jobs:
     - name: Prepare artifact
       run: |
         echo "image1" > test.txt
-        echo "image2" >> test.txt
+        echo "image2" > test2.txt
         mkdir test
         mkdir test/test2
         echo "image3" > test/test.txt
