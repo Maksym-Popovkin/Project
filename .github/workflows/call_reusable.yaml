@@ -38,6 +38,7 @@ jobs:
         name: my-artifact2
         path: |
           test/
+          test.txt
           
   call_reuable:
     needs: parse_sln-build-config_file
