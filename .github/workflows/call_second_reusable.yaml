@@ -2,66 +2,22 @@ name: Call reusable 2
 
 on: 
  workflow_call:
-#     inputs: 
-#       name:
-#         required: true
-#         type: string
 
 jobs:
   prepare_artifacts:
     runs-on: ubuntu-latest
     steps:
-      - name: Create files
-        run: |
-          echo "image1" > artifact1.txt
-          echo "image2" >> artifact1.txt
-          echo "image1" > artifact2.txt
-          echo "image2" >> artifact2.txt
-      - uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: |
-            artifact1.txt
-            artifact2.txt
+    - uses: actions/download-artifact@v3
+      with:
+        name: my-artifact
+    
+    - name: Display structure of downloaded files
+      run: |
+        ls -la
+        cat test.txt
+        echo "-----------"
+        cat test2.txt
             
   call_reuable2:
    needs: prepare_artifacts
-   uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
-#  pre-build:
-#   runs-on: ubuntu-latest
-#   outputs:
-#       service-projects: ${{ steps.configuration1.outputs.service-projects }}
-#       dotnet-version: ${{ steps.configuration1.outputs.dotnet-version }}
-    
-#   steps:
-#     - name: Clone BE repository
-#       uses: actions/checkout@v3
-    
-#     - name: Read Configuration
-#       id: configuration1
-#       uses: CumulusDS/get-yaml-paths-action@v1.0.1
-#       with:
-#         file: sln.build.yml
-#         dotnet-version: '"dotnet-version"'
-#         service-projects: '"services"[]'
-               
-#     - name: test
-#       id: configuration
-#       run: |
-#         service={\"include\":$(echo '${{ steps.configuration1.outputs.service-projects }}')}
-#         echo $service
-#         echo "service-projects=$service" >> $GITHUB_OUTPUT
-      
-#  call_reuable2:
-#    needs: pre-build
-#    strategy:
-#       fail-fast: false
-#       matrix: 
-#         service: ${{ fromJSON(needs.pre-build.outputs.service-projects) }}
-#    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
-#    with:
-#      source: ${{ matrix.service.name }}
-#      source1: ${{ matrix.service.project }}
-#      source2: ${{ matrix.service.unit-tests[0] }}
-#      dotnet-version: ${{ needs.pre-build.outputs.dotnet-version }}
-     
+   uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@Check
