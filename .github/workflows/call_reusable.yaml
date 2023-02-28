@@ -21,7 +21,7 @@ jobs:
         echo "image1" > test.txt
         echo "image2" >> test.txt
         echo "image3" > test2.txt
-        echo "image4" >> testt2.txt
+        echo "image4" >> test2.txt
     
     - uses: actions/upload-artifact@v3
       with:
