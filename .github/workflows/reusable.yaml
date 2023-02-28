@@ -9,11 +9,13 @@ jobs:
   steps:
     - uses: actions/download-artifact@v3
       with:
-        name: my-artifact
+        name: my-artifact2
     
     - name: Display structure of downloaded files
       run: |
         ls -la
+        cd test 
         cat test.txt
         echo "-----------"
-        cat test2.txt
+        cd test2
+        cat test.txt
