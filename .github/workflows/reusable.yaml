@@ -1,6 +1,9 @@
 name: Reusable
 
-on: [workflow_dispatch]
+on:
+  push:
+    branches:
+      - check-test
 
 jobs:
  test:
