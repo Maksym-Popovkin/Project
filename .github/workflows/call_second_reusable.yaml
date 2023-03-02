@@ -19,6 +19,6 @@ jobs:
         echo "test2.txt file contents:"
         cat test2.txt
             
-  call_reuable2:
-   needs: prepare_artifacts
-   uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@Check
+#   call_reuable2:
+#    needs: prepare_artifacts
+#    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@Check
