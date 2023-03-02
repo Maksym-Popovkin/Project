@@ -3,18 +3,13 @@ name: Call reusable 1
 on:
   push:
     branches:
-      - Check
+      - check-test
 
 jobs:
   parse_sln-build-config_file:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Repository
-      uses: actions/checkout@v3
-      with:
-        path: .
-        ref: Check
         
     - name: Prepare artifact
       run: |
