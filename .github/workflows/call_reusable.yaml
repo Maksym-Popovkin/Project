@@ -15,7 +15,7 @@ jobs:
       with:
         path: .
     - name: test
-      run: echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+      run: echo "### Hello **world**! :rocket:" >> $GITHUB_STEP_SUMMARY
 #     - name: Read Configuration
 #       id: configuration
 #       uses: CumulusDS/get-yaml-paths-action@v1.0.1
