@@ -14,16 +14,15 @@ jobs:
       uses: actions/checkout@v3
       with:
         path: .
-    - name: test
-      run: echo "Image **v0.0.23** done" >> $GITHUB_STEP_SUMMARY
-#     - name: Read Configuration
-#       id: configuration
-#       uses: CumulusDS/get-yaml-paths-action@v1.0.1
-#       with:
-#         file: sln.build.yml
-#         dotnet-version: '"dotnet-version"'
-#         service-projects: '"services"[]'
-#         unit-test-project: '"unit-test-project"'
+
+    - name: Read Configuration
+      id: configuration
+      uses: CumulusDS/get-yaml-paths-action@v1.0.1
+      with:
+        file: sln.build.yml
+        dotnet-version: '"dotnet-version"'
+        service-projects: '"services"[]'
+        unit-test-project: '"unit-te"'
         
 #     - name: test
 #       run: echo ${{ steps.configuration.outputs.service-projects }}
