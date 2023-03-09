@@ -2,31 +2,35 @@ name: Call reusable 2
 
 on: 
  workflow_call:
-#     inputs: 
-#       name:
-#         required: true
-#         type: string
+    inputs: 
+      dotnet-version:
+        required: true
+        type: string
 
 jobs:
   prepare_artifacts:
     runs-on: ubuntu-latest
     steps:
-      - name: Create files
-        run: |
-          echo "image1" > artifact1.txt
-          echo "image2" >> artifact1.txt
-          echo "image1" > artifact2.txt
-          echo "image2" >> artifact2.txt
-      - uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: |
-            artifact1.txt
-            artifact2.txt
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ inputs.dotnet-version }}
+#       - name: Create files
+#         run: |
+#           echo "image1" > artifact1.txt
+#           echo "image2" >> artifact1.txt
+#           echo "image1" > artifact2.txt
+#           echo "image2" >> artifact2.txt
+#       - uses: actions/upload-artifact@v3
+#         with:
+#           name: my-artifact
+#           path: |
+#             artifact1.txt
+#             artifact2.txt
             
-  call_reuable2:
-   needs: prepare_artifacts
-   uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
+#   call_reuable2:
+#    needs: prepare_artifacts
+#    uses: Maksym-Popovkin/Project/.github/workflows/reusable.yaml@master
 #  pre-build:
 #   runs-on: ubuntu-latest
 #   outputs:
