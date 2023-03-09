@@ -30,4 +30,4 @@ jobs:
     needs: parse_sln-build-config_file
     uses: Maksym-Popovkin/Project/.github/workflows/call_second_reusable.yaml@master
     with:
-      name: ${{ needs.parse_sln-build-config_file.outputs.dotnet-version }}
+      dotnet-version: ${{ needs.parse_sln-build-config_file.outputs.dotnet-version }}
