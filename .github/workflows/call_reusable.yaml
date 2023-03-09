@@ -27,6 +27,10 @@ jobs:
       run: echo ${{ steps.configuration.outputs.dotnet-version }}
   call_reuable1:
     needs: parse_sln-build-config_file
+    strategy:
+      fail-fast: false
+      matrix: 
+        dotnet-version: ${{ fromJson(needs.parse_sln-build-config_file.outputs.dotnet-version) }}
     uses: Maksym-Popovkin/Project/.github/workflows/call_second_reusable.yaml@master
     with:
-      dotnet-version: ${{ needs.parse_sln-build-config_file.outputs.dotnet-version }}
+      dotnet-version: ${{ matrix.dotnet-version }}
