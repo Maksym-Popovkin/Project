@@ -5,9 +5,8 @@ on: [workflow_dispatch]
 jobs:
   parse_sln-build-config_file:
     runs-on: ubuntu-latest
-#     outputs:
-#       dotnet-version: ${{ steps.configuration.outputs.dotnet-version }}
-#       service-projects: ${{ steps.configuration.outputs.service-projects }}
+    outputs:
+      dotnet-version: ${{ steps.configuration.outputs.dotnet-version }}
     steps:
     # Clone code from BE repository
     - name: Clone BE repository
